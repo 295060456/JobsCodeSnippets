@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.NSNotification</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// 在主线程上带参发通知
+-(jobsByKey_ValueBlock _Nonnull)JobsPost{
+    return ^(NSString *_Nonnull key,id _Nullable value){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [JobsNotificationCenter postNotificationName:key object:value];
+        });
+    };
+}
+/// 在主线程上不带参发通知
+-(jobsByStringBlock _Nonnull)jobsPost{
+    return ^(NSString *_Nonnull key){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.JobsPost(key,@(NO));
+        });
+    };
+}
+/// 接受通知
+@jobs_weakify(self)
+[self addNotificationName:kReachabilityChangedNotification
+                    block:^(id _Nullable weakSelf,
+                            id _Nullable arg) {
+    @jobs_strongify(self)
+    NSNotification *notification = (NSNotification *)arg;
+    NSLog(@"通知传递过来的 = %@",notification.object);
+}];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>2F253D33-35B8-407B-AE16-933659BA6858</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>自定义通知的使用</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.NSNotification</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

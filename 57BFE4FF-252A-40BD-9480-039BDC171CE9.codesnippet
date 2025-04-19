@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.UITableViewCell</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark —— @synthesize UITableViewCellProtocol
+/// 在其子类，可以不写这一句
+UITableViewCellProtocol_synthesize
+#pragma mark —— @synthesize UIViewModelProtocol
+UIViewModelProtocol_synthesize
+#pragma mark —— BaseCellProtocol
+/// UITableViewCell
++(JobsReturnTableViewCellByTableViewBlock _Nonnull)cellStyleDefaultWithTableView{
+    @jobs_weakify(self)
+    return ^(UITableView * _Nonnull tableView) {
+        @jobs_strongify(self)
+        UITableViewCell *cell = tableView.tableViewCellClass(self.class,@"");
+        if (!cell) {
+            cell = [self initTableViewCell:self
+                                 withStyle:UITableViewCellStyleDefault];
+            cell.settingForTableViewCell();
+            /**
+             参见：关于UITableViewCell和UICollectionViewCell圆切角+Cell的偏移量
+             ❤️如果单独的对每一个row对应的UITableViewCell的边距有缩进则使用下列方法❤️
+             如果这个TableViewCell是BaseTableViewCell则不需要复写-(void)setFrame:(CGRect)frame；否则是需要：
+             
+             UILocationProtocol_synthesize
+             直接影响:
+             cell.offsetXForEach = JobsWidth(8);
+             cell.offsetYForEach = JobsWidth(6);
+             
+             // 在具体的子类去实现,分类调用异常
+             #pragma mark —— 复写父类方法
+             -(void)setFrame:(CGRect)frame{
+                 NSLog(@"self.offsetXForEach = %f",self.offsetXForEach);
+                 NSLog(@"self.offsetYForEach = %f",self.offsetYForEach);
+                 frame.origin.x += self.offsetXForEach;
+                 frame.origin.y += self.offsetYForEach;
+                 frame.size.height -= self.offsetYForEach * 2;
+                 frame.size.width -= self.offsetXForEach * 2;
+                 [super setFrame:frame];
+             }
+
+             ❤️ 如果对每一section的cell进行缩进，则在外层协议：❤️
+             - (void)tableView:(UITableView *)tableView
+               willDisplayCell:(UITableViewCell *)cell
+             forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+                 [UITableViewCell tableView:tableView
+                makeSectionFirstAndLastCell:cell
+                                atIndexPath:indexPath
+                                  cellBgCor:UIColor.whiteColor
+                              bottomLineCor:UIColor.whiteColor
+                             cellOutLineCor:HEXCOLOR(0xEEE2C8)
+                                roundCorner:JobsWidth(8)
+                                borderWidth:JobsWidth(1)
+                                         dx:JobsWidth(0)
+                                         dy:0];
+             }
+             */
+        }return cell;
+    };
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+    self.textLabelFrameOffsetX = JobsWidth(0);// 等价于用这个 self.textLabel.resetByOffsetOriginX(JobsWidth(0));
+    self.textLabelFrameOffsetY = JobsWidth(0);// 等价于用这个 self.textLabel.resetByOffsetOriginY(JobsWidth(0));
+    self.textLabelFrameOffsetWidth = JobsWidth(0);// 等价于用这个 self.textLabel.resetByOffsetWidth(JobsWidth(0));
+    self.textLabelFrameOffsetHeight = JobsWidth(0);// 等价于用这个 self.textLabel.resetByOffsetHeight(JobsWidth(0));
+    
+    self.detailTextLabelOffsetX = JobsWidth(0);// 等价于用这个 self.detailTextLabel.resetByOffsetOriginX(JobsWidth(0));
+    self.detailTextLabelOffsetY = JobsWidth(0);// 等价于用这个 self.detailTextLabel.resetByOffsetOriginY(JobsWidth(0));
+    self.detailTextLabelOffsetWidth = JobsWidth(0);// 等价于用这个 self.detailTextLabel.resetByOffsetWidth(JobsWidth(0));
+    self.detailTextLabelOffsetHeight = JobsWidth(0);// 等价于用这个 self.detailTextLabel.resetByOffsetHeight(JobsWidth(0));
+    
+    self.imageViewFrameOffsetX = JobsWidth(0);// 等价于用这个 self.imageView.resetByOffsetOriginX(JobsWidth(0));
+    self.imageViewFrameOffsetY = JobsWidth(0);// 等价于用这个 self.imageView.resetByOffsetOriginY(JobsWidth(0));
+    self.imageViewFrameOffsetWidth = JobsWidth(0);// 等价于用这个 self.imageView.resetByOffsetWidth(JobsWidth(0));
+    self.imageViewFrameOffsetHeight = JobsWidth(0);// 等价于用这个 self.imageView.resetByOffsetHeight(JobsWidth(0));
+    
+    JobsLock(self.size = [MSHomePopupView viewSizeWithModel:nil];)
+    /// 内部指定圆切角
+    [self layoutSubviewsCutCnrByRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                    cornerRadii:CGSizeMake(JobsWidth(8), JobsWidth(8))];
+}
+/// 具体由子类进行复写【数据定UI】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
+-(void)richElementsInCellWithModel:(UIViewModel *_Nullable)model{
+    self.viewModel = model ? : UIViewModel.new;
+}
+/// 具体由子类进行复写【数据定高】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
++(CGFloat)cellHeightWithModel:(UIViewModel *_Nullable)model;
+/// 具体由子类进行复写【数据尺寸】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
++(CGSize)cellSizeWithModel:(UIViewModel *_Nullable)model;
+/// 设置Cell的背景图片
+-(void)setCellBgImage:(UIImage *)bgImage;
+/// 获取绑定的数据源
+-(UIViewModel *)getViewModel{
+    return _viewModel;
+}
+#pragma mark —— 子类重写父类方法
+/**
+ 1、-(void)setFrame:(CGRect)frame 此方法仅限于具体的 UITableViewCell子类使用
+ 2、如果在 BaseTableViewCell 实现此方法，那么一单相关子类集成 BaseTableViewCell 则会对-(void)setFrame:(CGRect)frame进行反复调用，因为[super setFrame:frame];
+ 3、禁止分类去调用，否则引起异常
+ */
+-(void)setFrame:(CGRect)frame{
+    self.offsetXForEach = JobsWidth(7);
+    self.offsetYForEach = JobsWidth(3);
+    [self jobsResetTableViewCellFrame:frame
+                          cellOffsetX:self.offsetXForEach
+                          cellOffsetY:self.offsetYForEach];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>57BFE4FF-252A-40BD-9480-039BDC171CE9</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>基于BaseCellProtocol的TBVCell创建</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.UITableViewCell</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

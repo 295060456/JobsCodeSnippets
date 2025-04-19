@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.richText</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark —— 富文本
+@synthesize attributedText = _attributedText;
+-(NSAttributedString *)attributedText{
+    if (!_attributedText) {
+        @jobs_weakify(self)
+        _attributedText = self.richTextWithDataConfigMutArr(jobsMakeMutArr(^(__kindof NSMutableArray &lt;JobsRichTextConfig *&gt;*_Nullable data) {
+            data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                @jobs_strongify(self)
+                data1.font = UIFontWeightRegularSize(JobsWidth(12));
+                data1.textCor = JobsBlueColor;
+                data1.targetString = JobsInternationalization(@"编译器自动管理内存地址").add(@"\n");
+                data1.textBgCor = JobsBrownColor;
+                data1.paragraphStyle = jobsMakeParagraphStyle(^(NSMutableParagraphStyle * _Nullable data2) {
+                    data2.alignment = NSTextAlignmentJustified;
+                    data2.paragraphSpacing = 0;//段距，取值 float
+                    data2.paragraphSpacingBefore = 0;//段首空间，取值 float
+                    data2.firstLineHeadIndent = 0.0;//首行缩进，取值 float
+                    data2.headIndent = 0.0;//整体缩进(首行除外)，取值 float
+                    data2.lineSpacing = 0;//行距，取值 float
+                });
+            }));
+            data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                @jobs_strongify(self)
+                data1.font = UIFontWeightSemiboldSize(JobsWidth(13));
+                data1.textCor = JobsWhiteColor;
+                data1.targetString = JobsInternationalization(@"让程序员更加专注于").add(@"\n");
+                data1.textBgCor = JobsBrownColor;
+                data1.paragraphStyle = jobsMakeParagraphStyle(^(NSMutableParagraphStyle * _Nullable data2) {
+                    data2.alignment = NSTextAlignmentJustified;
+                    data2.paragraphSpacing = 0;//段距，取值 float
+                    data2.paragraphSpacingBefore = 0;//段首空间，取值 float
+                    data2.firstLineHeadIndent = 0.0;//首行缩进，取值 float
+                    data2.headIndent = 0.0;//整体缩进(首行除外)，取值 float
+                    data2.lineSpacing = 0;//行距，取值 float
+                });
+            }));
+            data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                @jobs_strongify(self)
+                data1.font = UIFontWeightUltraLightSize(JobsWidth(14));
+                data1.textCor = JobsGreenColor;
+                data1.targetString = JobsInternationalization(@"APP的业务。");
+                data1.textBgCor = JobsBrownColor;
+                data1.paragraphStyle = jobsMakeParagraphStyle(^(NSMutableParagraphStyle * _Nullable data2) {
+                    data2.alignment = NSTextAlignmentJustified;
+                    data2.paragraphSpacing = 0;//段距，取值 float
+                    data2.paragraphSpacingBefore = 0;//段首空间，取值 float
+                    data2.firstLineHeadIndent = 0.0;//首行缩进，取值 float
+                    data2.headIndent = 0.0;//整体缩进(首行除外)，取值 float
+                    data2.lineSpacing = 0;//行距，取值 float
+                });
+            }));
+        }));
+    }return _attributedText;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7F4297A6-6D0E-49DF-8561-7F635F3625A6</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>富文本</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>富文本</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

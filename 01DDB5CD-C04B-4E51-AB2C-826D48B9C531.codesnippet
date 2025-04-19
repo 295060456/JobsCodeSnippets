@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>CP</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// 调取系统相机（没有兼容横屏）
+[self invokeSysCameraSuccessBlock:^(HXPhotoPickerModel *data) {
+    @jobs_strongify(self)
+} failBlock:^(HXPhotoPickerModel *data) {
+    @jobs_strongify(self)
+}];
+/// 完全意义上的调用系统的相机拍照功能
+self.invokeSysCamera();
+[self actionObjectBlock:^(id _Nullable data) {
+    NSLog(@"");
+}];
+/// 调取系统相册
+[self invokeSysPhotoAlbumSuccessBlock:^(HXPhotoPickerModel *data) {
+    @jobs_strongify(self)
+} failBlock:^(HXPhotoPickerModel *data) {
+    @jobs_strongify(self)
+}];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>01DDB5CD-C04B-4E51-AB2C-826D48B9C531</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>调取系统相册&amp;系统相机</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>调取系统相册&amp;系统相机</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

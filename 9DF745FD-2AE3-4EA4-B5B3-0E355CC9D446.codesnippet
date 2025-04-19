@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>JobsCategoryProperties</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// 一般的基础数据类型
+#pragma mark —— @property(nonatomic,assign)BOOL isHiddenNavigationBar
+JobsKey(_isHiddenNavigationBar)
+@dynamic isHiddenNavigationBar;
+-(BOOL)isHiddenNavigationBar{//默认不显示
+    return [Jobs_getAssociatedObject(_isHiddenNavigationBar) boolValue];
+}
+
+-(void)setIsHiddenNavigationBar:(BOOL)isHiddenNavigationBar{
+    [self.navigationController setNavigationBarHidden:isHiddenNavigationBar animated:true];
+    Jobs_setAssociatedRETAIN_NONATOMIC(_isHiddenNavigationBar, @(isHiddenNavigationBar))
+}
+/// 结构体 CGSize
+#pragma mark —— @property(nonatomic,assign)CGSize size;
+JobsKey(_size)
+@dynamic size;
+-(CGSize)size{
+    CGSize Size = [Jobs_getAssociatedObject(_size) CGSizeValue];
+    if (CGSizeEqualToSize(Size, CGSizeZero)) {
+        Size = CGSizeMake(JobsWidth(10), JobsWidth(18.3));//缺省值
+        Jobs_setAssociatedRETAIN_NONATOMIC(_size, [NSValue valueWithCGSize:Size])
+    }return Size;
+}
+
+-(void)setSize:(CGSize)size{
+    Jobs_setAssociatedRETAIN_NONATOMIC(_size, [NSValue valueWithCGSize:size])
+}
+/// 结构体 CGPoint
+#pragma mark —— @property(nonatomic,assign)CGPoint lastPoint;
+JobsKey(_lastPoint)
+@dynamic lastPoint;
+-(CGPoint)lastPoint{
+    CGPoint LastPoint = [Jobs_getAssociatedObject(_lastPoint) CGPointValue];
+    return LastPoint;
+}
+
+-(void)setLastPoint:(CGPoint)lastPoint{
+    Jobs_setAssociatedRETAIN_NONATOMIC(_lastPoint, [NSValue valueWithCGPoint:lastPoint])
+}
+/// 一般的对象
+#pragma mark —— @property(nonatomic,strong)UIViewModel *viewModel;
+JobsKey(_viewModel)
+@dynamic viewModel;
+-(UIViewModel *)viewModel{
+    UIViewModel *ViewModel = Jobs_getAssociatedObject(_viewModel);
+    if (!ViewModel) {
+        ViewModel = UIViewModel.new;
+        Jobs_setAssociatedRETAIN_NONATOMIC(_viewModel, ViewModel)
+    }return ViewModel;
+}
+
+-(void)setViewModel:(UIViewModel *)viewModel{
+    Jobs_setAssociatedRETAIN_NONATOMIC(_viewModel, viewModel)
+}
+#pragma mark —— @property(nonatomic,assign)jobsByVoidBlock voidBlock;/// 无入参，无返回值的回调
+JobsKey(_voidBlock)
+@dynamic voidBlock;
+-(jobsByVoidBlock)voidBlock{
+    return Jobs_getAssociatedObject(_voidBlock);
+}
+
+-(void)setVoidBlock:(jobsByVoidBlock)voidBlock{
+    Jobs_setAssociatedCOPY_NONATOMIC(_voidBlock, voidBlock)
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9DF745FD-2AE3-4EA4-B5B3-0E355CC9D446</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>分类加【数据】属性Demo</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>JobsCategoryProperties</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

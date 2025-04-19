@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.JobsBtn</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>BaseButton.jobsInit()
+    .bgColor(JobsWhiteColor)
+    .jobsResetImagePlacement(NSDirectionalRectEdgeLeading)
+    .jobsResetImagePadding(1)
+    .jobsResetBtnImage(JobsIMG(@"APPLY NOW"))
+    .jobsResetBtnBgImage(JobsIMG(@"APPLY NOW"))
+    .jobsResetBtnTitleCor(JobsWhiteColor)
+    .jobsResetBtnTitleFont(UIFontWeightBoldSize(JobsWidth(12)))
+    .jobsResetBtnTitle(JobsInternationalization(@"APPLY NOW"))
+    .onClick(^(UIButton *x){
+        NSLog(@"");
+    }).onLongPressGesture(^(id data){
+        NSLog(@"");
+    });</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3E747309-55E5-44FB-8C99-A56BF1220256</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>创建UIButton，兼容新老Api</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.JobsBtn</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

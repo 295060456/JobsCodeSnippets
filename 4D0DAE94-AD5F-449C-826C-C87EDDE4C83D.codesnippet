@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.UITextView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>-(UITextView *)tipsTextView{
+    if (!_tipsTextView) {
+        _tipsTextView = UITextView.new;
+        _tipsTextView.delegate = self;
+        _tipsTextView.editable = NO;/// 必须禁止输入，否则点击将会弹出输入键盘
+        _tipsTextView.scrollEnabled = NO;/// 可选的，视具体情况而定
+        _tipsTextView.linkTextAttributes = @{NSForegroundColorAttributeName:HEXCOLOR(0xCCB17E)};/// 链接文字颜色
+        _tipsTextView.attributedText = self.attributedStringData;
+        _tipsTextView.userInteractionEnabled = YES;
+        [self.contentView addSubview:_tipsTextView];
+        [_tipsTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(JobsMainScreen_WIDTH(), JobsWidth(30)));
+            make.centerX.equalTo(self.contentView);
+            make.bottom.equalTo(self.contentView).offset(-JobsWidth(38));
+        }];
+    }return _tipsTextView;
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>4D0DAE94-AD5F-449C-826C-C87EDDE4C83D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>创建UITextView相关子类</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.UITextView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

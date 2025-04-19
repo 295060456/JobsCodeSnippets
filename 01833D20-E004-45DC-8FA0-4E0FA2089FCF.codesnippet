@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>相关类：
+#import "NSObject+Extras.h"
+/// 在初始化方法里面进行接入
+-(instancetype)init{
+    if (self = [super init]) {
+        [self registerKeyboard];
+    }return self;
+}
+
+-(void)registerKeyboard{
+    IQKeyboardManager.sharedManager.enable = NO;
+    [self keyboard];
+    @jobs_weakify(self)
+    __block CGFloat gg = 0;// 修正间距
+    /// 键盘弹起的时候的方法监听回调
+    [self actionkeyboardUpNotificationBlock:^id(NSNotificationKeyboardModel *data) {
+        @jobs_strongify(self)
+        NSLog(@"userInfo = %@",data.userInfo);
+        NSLog(@"beginFrame = %@",NSStringFromCGRect(data.beginFrame));
+        NSLog(@"endFrame = %@",NSStringFromCGRect(data.endFrame));
+        NSLog(@"keyboardOffsetY = %f",data.keyboardOffsetY);
+        NSLog(@"notificationName = %@",data.notificationName);
+        
+        // 键盘高度：data.keyboardOffsetY
+        // view底的Y值：self.y + [MSPayView viewSizeWithModel:nil].height
+        // 我希望的view距离键盘的固定距离为JobsWidth(20),即:data.keyboardOffsetY - (self.y + [MSPayView viewSizeWithModel:nil].height) = JobsWidth(20)
+        CGFloat dd = data.keyboardOffsetY - (self.y + [MSPayView viewSizeWithModel:nil].height);// 实际间距
+        CGFloat ff = JobsWidth(20) - dd;
+        if(ff &gt; 0){
+            // 实际间距 小于 我希望的距离
+            self.y -= JobsWidth(20);
+            gg = ff;// 修正为补偿值
+        }else{
+            // 实际间距 大于 我希望的距离
+            gg = JobsWidth(20);
+        }
+        self.y -= gg;
+        return nil;
+    }];
+    /// 键盘消失的时候的方法监听回调
+    [self actionkeyboardDownNotificationBlock:^id(id data) {
+        @jobs_strongify(self)
+        self.y += gg;
+        NSLog(@"ddd = %f",self.origin.y);
+        return nil;
+    }];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>01833D20-E004-45DC-8FA0-4E0FA2089FCF</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>摈弃IQKeyboardManager，直接用系统通知方法对键盘高度进行监听</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.keyboard</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

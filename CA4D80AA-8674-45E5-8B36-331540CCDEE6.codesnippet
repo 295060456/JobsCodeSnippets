@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.JobsAttributedBtn</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string> -(BaseButton *)applyNowBtn{
+     if(!_applyNowBtn){
+         @jobs_weakify(self)
+         _applyNowBtn = BaseButton.initByAttributedString(self.richTextWithDataConfigMutArr(jobsMakeMutArr(^(__kindof NSMutableArray * _Nullable data) {
+             data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                 @jobs_strongify(self)
+                 data1.font = UIFontWeightRegularSize(14);
+                 data1.textCor = JobsCor(@"#666666");
+                 data1.targetString = self.richTextMutArr[0];
+                 data1.paragraphStyle = self.jobsParagraphStyleCenter;
+             }));
+             data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                 @jobs_strongify(self)
+                 data1.font = UIFontWeightRegularSize(14);
+                 data1.textCor = JobsCor(@"#BA9B77");
+                 data1.targetString = self.richTextMutArr[1];
+                 data1.paragraphStyle = self.jobsParagraphStyleCenter;
+             }));
+             data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
+                 @jobs_strongify(self)
+                 data1.font = UIFontWeightRegularSize(14);
+                 data1.textCor = JobsCor(@"#666666");
+                 data1.targetString = self.richTextMutArr[2];
+                 data1.paragraphStyle = self.jobsParagraphStyleCenter;
+             }));
+         }))).bgColor(JobsWhiteColor)
+             .jobsResetImagePlacement(NSDirectionalRectEdgeLeading)
+             .jobsResetImagePadding(1)
+             .jobsResetBtnImage(JobsIMG(@"APPLY NOW"))
+             .jobsResetBtnBgImage(JobsIMG(@"APPLY NOW"))
+             .jobsResetBtnTitleCor(JobsWhiteColor)
+             .jobsResetBtnTitleFont(UIFontWeightBoldSize(JobsWidth(12)))
+             .jobsResetBtnTitle(JobsInternationalization(@"APPLY NOW"))
+             .onClick(^(UIButton *x){
+                 @jobs_strongify(self)
+                 x.selected = !x.selected;
+                 if (self.objectBlock) self.objectBlock(x);
+             }).onLongPressGesture(^(id data){
+                 NSLog(@"");
+             });
+     }return _applyNowBtn;
+ }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>CA4D80AA-8674-45E5-8B36-331540CCDEE6</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>创建富文本按钮</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.JobsAttributedBtn</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

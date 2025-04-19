@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>JobsAPI</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// 请求的完整URL：发送短信验证码【POST】
+-(NSString *)requestUrl{
+    return self.BaseUrl.add(self.post_user_verCode_sendSms.url);
+}
+/// 请求方式
+-(YTKRequestMethod)requestMethod {
+    return YTKRequestMethodPOST;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>908CC198-C125-465D-A8FB-388476C6EC17</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>网络Api接口的实现</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>JobsAPI</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

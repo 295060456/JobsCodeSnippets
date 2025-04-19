@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.viewForHeaderInSection</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#  viewForHeaderInSection 的使用记录
+
+tableView的每个Section的头部出现一个view，涉及到复用机制
+
+定义 BaiShaETProjMembersBoardView 文件
+```
+BaiShaETProjMembersBoardView.h
+@interface BaiShaETProjMembersBoardView : BaseTableViewHeaderView
+
+BaiShaETProjMembersBoardView.m
+-(instancetype)init{
+    if (self = [super init]) {
+        self.backgroundColor = UIColor.whiteColor;
+    }return self;
+}
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
+    if(self == [super initWithReuseIdentifier:reuseIdentifier]){
+
+    }return self;
+}
+
+-(void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    JobsLock(self.size = [MSHomePopupView viewSizeWithModel:nil];)
+    /// 内部指定圆切角
+    [self layoutSubviewsCutCnrByRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                    cornerRadii:CGSizeMake(JobsWidth(8), JobsWidth(8))];
+}
+#pragma mark —— BaseViewProtocol
+/// 具体由子类进行复写【数据定UI】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
+-(void)richElementsInViewWithModel:(UIViewModel *_Nullable)model{
+    self.viewModel = model;
+    MakeDataNull
+}
+/// 具体由子类进行复写【数据尺寸】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
++ (CGRect)viewFrameWithModel:(UIViewModel *)model{
+    return CGRectMake(0, 0, JobsMainScreen_WIDTH(), JobsWidth(39 + 64));
+}
+#pragma mark —— lazyLoad
+...
+```
+在使用TableView的主类,关联下列协议
+```
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+```
+在TableView初始化部分进行注册
+```
+1、[_tableView registerTableViewClass];
+        
+2、在UITableView+RegisterClass.m添加如下
+-(void)registerTableViewClass{
+    [self registerHeaderFooterViewClass:BaiShaETProjMembersBoardView.class];
+}
+```
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>57B46234-2C58-4124-8B79-6EE6AA131A53</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>viewForHeaderInSection的使用记录</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.ViewForHeaderInSection</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

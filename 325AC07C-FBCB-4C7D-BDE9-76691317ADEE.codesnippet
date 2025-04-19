@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>init.UICollectionView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+&lt;
+UICollectionViewDataSource
+,UICollectionViewDelegate
+,UICollectionViewDelegateFlowLayout
+&gt;
+
+/// UI
+Prop_strong()UICollectionViewFlowLayout *layout;
+Prop_strong()BaseCollectionView *collectionView;
+/// Data
+Prop_copy()NSMutableArray &lt;UIViewModel *&gt;*dataMutArr;
+
+#pragma mark —— 一些私有方法
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    JobsLock(self.size = [MSHomePopupView viewSizeWithModel:nil];)
+    /// 内部指定圆切角
+    [self appointCornerCutToCircleByRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                        cornerRadii:CGSizeMake(JobsWidth(8), JobsWidth(8))];
+}
+
+-(UICollectionViewFlowLayout *)makeLayout{
+    self.verticalLayout.itemSize = CGSizeMake(100, 100);  // 设置单元格尺寸
+    self.verticalLayout.minimumLineSpacing = 10;  // 设置行间距
+    self.verticalLayout.minimumInteritemSpacing = 10;  // 设置单元格之间的间距
+    self.verticalLayout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);  // 设置 section 的内边距
+    return self.verticalLayout;
+}
+#pragma mark —— UICollectionViewCell 部署策略
+//见 @interface NSObject (JobsDeployCellConfig)
+#pragma mark —— UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
+                                   cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    @jobs_weakify(self)
+    return [self planAtIndexPath:indexPath
+                          block1:^{
+        @jobs_strongify(self)
+        BaiShaETProjCountdownCVCell *cell = [BaiShaETProjCountdownCVCell cellWithCollectionView:collectionView forIndexPath:indexPath];
+        cell.jobsRichElementsInCellWithModel(self.dataMutArr[indexPath.section]);
+        return cell;
+    }block2:^{
+        @jobs_strongify(self)
+        BaiShaETProjOrderDetailsCVCell *cell = [BaiShaETProjOrderDetailsCVCell cellWithCollectionView:collectionView forIndexPath:indexPath];
+        cell.jobsRichElementsInCellWithModel(self.dataMutArr[indexPath.section]);
+        return cell;
+    }block3:^{
+        ReturnBaseCollectionViewCell;
+    }block4:^{
+        ReturnBaseCollectionViewCell;
+    }block5:^id{
+        ReturnBaseCollectionViewCell;
+    }];
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+    return self.dataMutArr.count;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+viewForSupplementaryElementOfKind:(NSString *)kind
+atIndexPath:(NSIndexPath *)indexPath {
+    if (kind.isEqualToString(UICollectionElementKindSectionHeader)) {
+        JobsHeaderFooterView *headerView = [collectionView UICollectionElementKindSectionHeaderClass:JobsHeaderFooterView.class
+                                                                                        forIndexPath:indexPath];
+        headerView.jobsRichViewByModel(jobsMakeMutArr(^(__kindof NSMutableArray &lt;NSMutableArray &lt;__kindof UIViewModel *&gt;*&gt;* _Nullable arr0) {
+            arr0.add(jobsMakeMutArr(^(__kindof NSMutableArray &lt;__kindof UIViewModel *&gt;* _Nullable arr1) {
+                arr1.add(jobsMakeViewModel(^(__kindof UIViewModel * _Nullable viewModel) {
+                    viewModel.textModel.text = JobsInternationalization(@"请快速选择金额(元)");
+                }));
+            }));
+        })[indexPath.section]);
+        return headerView;
+    }else if (kind.isEqualToString(UICollectionElementKindSectionFooter)) {
+        ReturnBaseCollectionReusableFooterView
+    }else ReturnBaseCollectionReusableHeaderView
+}
+#pragma mark —— UICollectionViewDelegate
+/// 允许选中时，高亮
+-(BOOL)collectionView:(UICollectionView *)collectionView
+shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+    return YES;
+}
+/// 高亮完成后回调
+-(void)collectionView:(UICollectionView *)collectionView
+didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+}
+/// 由高亮转成非高亮完成时的回调
+-(void)collectionView:(UICollectionView *)collectionView
+didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+}
+/// 设置是否允许选中
+-(BOOL)collectionView:(UICollectionView *)collectionView
+shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+    return YES;
+}
+/// 设置是否允许取消选中
+-(BOOL)collectionView:(UICollectionView *)collectionView
+shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+    return YES;
+}
+/// 选中操作
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+    /**
+     滚动到指定位置
+     _collectionView.contentOffset = CGPointMake(0,-100);
+     [_collectionView setContentOffset:CGPointMake(0, -200) animated:YES];// 只有在viewDidAppear周期 或者 手动触发才有效
+     */
+}
+/// 取消选中操作
+-(void)collectionView:(UICollectionView *)collectionView
+didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%s", __FUNCTION__);
+}
+#pragma mark —— UICollectionViewDelegateFlowLayout
+/// header 大小
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+referenceSizeForHeaderInSection:(NSInteger)section {
+    return [UBLSearchCollectionReusableView collectionReusableViewSizeWithModel:nil];
+}
+/// Footer 大小
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+referenceSizeForFooterInSection:(NSInteger)section{
+    return [CasinoAgencyRecommendTipsCRView collectionReusableViewSizeWithModel:nil];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self planSizeAtIndexPath:indexPath
+                              block1:^CGSize{
+        return [BaiShaETProjCountdownCVCell cellSizeWithModel:nil];
+    } block2:^CGSize{
+        return [BaiShaETProjOrderDetailsCVCell cellSizeWithModel:self.dataMutArr[indexPath.section]];
+    } block3:^CGSize{
+        return CGSizeZero;
+    } block4:^CGSize{
+        return CGSizeZero;
+    } block5:^CGSize{
+        return CGSizeZero;
+    }];
+}
+/// 定义的是元素（垂直方向滚动的时候）垂直之间的间距 或者 是元素（水平方向滚动的时候）水平之间的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 12;
+}
+/// 定义的是UICollectionViewScrollDirectionVertical下，元素水平之间的间距。
+/// UICollectionViewScrollDirectionHorizontal下，垂直和水平正好相反
+/// Api自动计算一行的Cell个数，只有当间距小于此定义的最小值时才会换行，最小执行单元是Section（每个section里面的样式是统一的）
+/// 定义的是元素（垂直方向滚动的时候）水平之间的间距 或者 是元素（水平方向滚动的时候）垂直之间的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+/// 内间距
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                       layout:(UICollectionViewLayout *)collectionViewLayout
+       insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+#pragma mark —— lazyLoad
+-(UICollectionViewFlowLayout *)layout{
+    if (!_layout) {
+        _layout = self.verticalLayout;
+    }return _layout;
+}
+
+-(BaseCollectionView *)collectionView{
+    if (!_collectionView) {
+        _collectionView = BaseCollectionView.initByLayout(self.verticalLayout);
+        _collectionView.dataLink(self);
+        _collectionView.bounces = NO;///设置为NO，使得collectionView只能上拉，不能下拉
+        _collectionView.backgroundColor = JobsGreenColor;//RGB_SAMECOLOR(246);
+        _collectionView.layoutSubviewsRectCorner = UIRectCornerTopLeft | UIRectCornerTopRight;
+        _collectionView.layoutSubviewsRectCornerSize = CGSizeMake(JobsWidth(20), JobsWidth(20));
+    
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, JobsBottomSafeAreaHeight(), 0);
+        //_collectionView.contentOffset = CGPointMake(0, -JobsWidth(250));//
+        [_collectionView setContentOffset:CGPointMake(0, -400) animated:YES];// 这句最快在 viewWillLayoutSubviews 有效
+        
+        {
+            _collectionView.registerCollectionViewClass();
+            
+            _collectionView.registerCollectionElementKindSectionHeaderClass(TMSWalletCollectionReusableView.class,@"");
+            _collectionView.registerCollectionElementKindSectionFooterClass(TMSWalletCollectionReusableView.class,@"");
+            
+            _collectionView.registerCollectionViewCellClass(TMSWalletCollectionViewCell.class,@"");
+            _collectionView.registerCollectionViewCellClass(BaiShaETProjBankAccMgmtCVCell.class,@"");
+            
+        }
+        
+        {
+            {
+                _collectionView.mj_header = _collectionView.MJRefreshNormalHeaderBy([self refreshHeaderDataBy:^id _Nullable(id  _Nullable data) {
+                    @jobs_strongify(self)
+                    self.feedbackGenerator(nil);//震动反馈
+                    self-&gt;_collectionView.endRefreshing(YES);
+                    return nil;
+                }]);
+                _collectionView.mj_header.automaticallyChangeAlpha = YES;//根据拖拽比例自动切换透明度
+            }
+
+           /// 如果需要支持lottie动画
+            {
+                self.lotAnimMJRefreshHeader.refreshConfigModel = jobsMakeRefreshConfigModel(^(__kindof MJRefreshConfigModel * _Nullable model) {
+                    
+                });
+                self.refreshConfigFooter = jobsMakeRefreshConfigModel(^(__kindof MJRefreshConfigModel * _Nullable model) {
+                    
+                });
+                _collectionView.mj_header = self.lotAnimMJRefreshHeader;
+            }
+        }
+        
+        {
+            _collectionView.buttonModelEmptyData = jobsMakeButtonModel(^(__kindof UIButtonModel * _Nullable data) {
+                data.title = JobsInternationalization(@"NO BANK CARD FOUND");
+                data.titleCor = JobsWhiteColor;
+                data.titleFont = bayonRegular(JobsWidth(30));
+                data.normalImage = JobsIMG(@"小狮子");
+            });
+        }
+
+//        {
+//            _collectionView.tabAnimated = [TABCollectionAnimated animatedWithCellClassArray:jobsMakeMutArr(^(__kindof NSMutableArray&lt;NSObject *&gt; * _Nullable arr) {
+//                arr.add(DDCollectionViewCell_Style2.class)
+//                .add(DDCollectionViewCell_Style3.class)
+//                .add(DDCollectionViewCell_Style4.class);
+//            })
+//                                                                              cellSizeArray:jobsMakeMutArr(^(__kindof NSMutableArray&lt;NSObject *&gt; * _Nullable arr) {
+//                arr.add(NSValue.bySize([DDCollectionViewCell_Style2 cellSizeWithModel:nil]))
+//                    .add(NSValue.bySize([DDCollectionViewCell_Style3 cellSizeWithModel:nil]))
+//                    .add(NSValue.bySize([DDCollectionViewCell_Style4 cellSizeWithModel:nil]))
+//            })
+//                                                                         animatedCountArray:@[@(1),@(1),@(1)]];
+//            [_collectionView.tabAnimated addHeaderViewClass:BaseCollectionReusableView_Style1.class
+//                                                   viewSize:[BaseCollectionReusableView_Style1 collectionReusableViewSizeWithModel:nil]
+//                                                  toSection:0];
+//            [_collectionView.tabAnimated addHeaderViewClass:BaseCollectionReusableView_Style1.class
+//                                                   viewSize:[BaseCollectionReusableView_Style2 collectionReusableViewSizeWithModel:nil]
+//                                                  toSection:2];
+//
+//            _collectionView.tabAnimated.containNestAnimation = YES;
+//            _collectionView.tabAnimated.superAnimationType = TABViewSuperAnimationTypeShimmer;
+//            _collectionView.tabAnimated.canLoadAgain = YES;
+//            [_collectionView tab_startAnimation];   // 开启动画
+//        }
+//        {
+//            _collectionView.tabAnimated = [TABCollectionAnimated animatedWithCellClass:HomeCVCell.class
+//                                                                              cellSize:HomeCVCell.cellSizeByModel(nil)];
+//            _collectionView.tabAnimated.superAnimationType = TABViewSuperAnimationTypeBinAnimation;
+//            _collectionView.tabAnimated.canLoadAgain = YES;
+//            _collectionView.tabAnimated.animatedBackViewCornerRadius = JobsWidth(8);
+////            _collectionView.tabAnimated.animatedBackgroundColor = JobsRedColor;
+//            [_collectionView tab_startAnimation];   // 开启动画
+//        }
+        [self.view.addSubview(_collectionView) mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [self layoutIfNeeded];
+        @jobs_weakify(self)
+        [_collectionView xzm_addNormalHeaderWithTarget:self
+                                                action:selectorBlocks(^id _Nullable(id _Nullable weakSelf,
+                                                                                    id _Nullable arg) {
+            NSLog(@"SSSS加载新的数据，参数: %@", arg);
+            @jobs_strongify(self)
+            /// 在需要结束刷新的时候调用（只能调用一次）
+            /// _collectionView.endRefreshing();
+            return nil;
+        }, MethodName(self), self)];
+
+        [_collectionView xzm_addNormalFooterWithTarget:self
+                                                action:selectorBlocks(^id _Nullable(id _Nullable weakSelf,
+                                                                                    id _Nullable arg) {
+            NSLog(@"SSSS加载新的数据，参数: %@", arg);
+            @jobs_strongify(self)
+            /// 在需要结束刷新的时候调用（只能调用一次）
+            /// _collectionView.endRefreshing();
+            return nil;
+        }, MethodName(self), self)];
+        // 隐藏时间
+        _collectionView.xzm_header.updatedTimeHidden = YES;
+        [_collectionView.xzm_header beginRefreshing];
+    }return _collectionView;
+}
+
+-(NSMutableArray&lt;UIViewModel *&gt; *)dataMutArr{
+    if (!_dataMutArr) {
+        _dataMutArr = jobsMakeMutArr(^(__kindof NSMutableArray &lt;UIViewModel *&gt;* _Nullable data) {
+            
+        });
+    }return _dataMutArr;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>325AC07C-FBCB-4C7D-BDE9-76691317ADEE</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>创建UICollectionView的子类</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>init.UICollectionView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>DataAnalysis</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/*
+     常用的解析方法:
+
+     1、NSMutableArray *tags = [VideoTagModel mj_objectArrayWithKeyValuesArray:model.data]; //【对待data是数组】
+     2、DDMyVipModel *myVipModel = [DDMyVipModel mj_objectWithKeyValues:data]; //【对待data是字典】
+ */
+
+-(jobsByImageBlock _Nonnull)normalImage{
+    @jobs_weakify(self)
+    return ^(UIImage *_Nonnull image) {
+        @jobs_strongify(self)
+        if (@available(iOS 16.0, *)) {
+            [self jobsUpdateButtonConfiguration:^(UIButtonConfiguration * _Nullable config) {
+                config.image = image;
+            }];
+        } else [self setImage:image forState:UIControlStateNormal];
+    };
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0A06BFDA-708E-4DE1-A6CE-EBE7ED822BE2</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>MJExtension的常用数据解析方法</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>DataAnalysis</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
