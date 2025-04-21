@@ -291,7 +291,7 @@ Prop_strong()JXCategoryNumberView *categoryView;/// 右上角带文字
 
 Prop_strong()JXCategoryListContainerView *listContainerView;/// 此属性决定依附于此的viewController
 /// Data
-Prop_copy()NSMutableArray &lt;UIViewController *&gt;*childVCMutArr;
+Prop_strong()NSMutableArray &lt;__kindof UIViewController&lt;JXCategoryListContentViewDelegate&gt; *&gt;*childVCMutArr;
 Prop_copy()NSMutableArray &lt;__kindof NSString *&gt;*titles;
 /// 此属性决定依附于此的viewController
 -(JXCategoryListContainerView *)listContainerView{

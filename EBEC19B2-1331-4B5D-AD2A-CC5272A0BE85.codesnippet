@@ -82,7 +82,18 @@ static dispatch_once_t static_tipsView01OnceToken;
 -(CGSize)viewSizeByModel:(UIViewModel *_Nullable)model{
     return [self.class viewSizeByModel:nil];
 }
-#pragma mark —— lazyLoad</string>
+#pragma mark —— lazyLoad
+
+-(FMLoginByUsrNameView *)loginByUsrNameView{
+    if(!_loginByUsrNameView){
+        _loginByUsrNameView = FMLoginByUsrNameView
+            .BySize(FMLoginByUsrNameView.viewSizeByModel(nil))
+            .JobsRichViewByModel2(nil)
+            .JobsBlock1(^(id  _Nullable data) {
+                
+            });
+    }return _loginByUsrNameView;
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>EBEC19B2-1331-4B5D-AD2A-CC5272A0BE85</string>
 	<key>IDECodeSnippetLanguage</key>
