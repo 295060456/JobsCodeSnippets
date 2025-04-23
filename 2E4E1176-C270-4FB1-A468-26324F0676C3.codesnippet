@@ -13,7 +13,7 @@
 
 @interface MSPromotionIncentiveCVHeaderFooterView ()
 /// UI
-@property(nonatomic,strong)UILabel *titleLab;
+Prop_strong()UILabel *titleLab;
 
 @end
 
@@ -47,15 +47,17 @@
 #pragma mark —— lazyLoad
 -(UILabel *)titleLab{
     if (!_titleLab) {
-        _titleLab = UILabel.new;
-        _titleLab.textColor = RGBA_COLOR(51, 51, 51, 1);
-        _titleLab.font = UIFontWeightBoldSize(16);
-        [self addSubview:_titleLab];
-        [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(JobsWidth(18));
-            make.left.equalTo(self).offset(JobsWidth(16));
-            make.top.equalTo(self).offset(JobsWidth(5));
-        }];
+        @jobs_weakify(self)
+        _titleLab = jobsMakeLabel(^(__kindof UILabel * _Nullable label) {
+            @jobs_weakify(self)
+            label.textColor = RGBA_COLOR(51, 51, 51, 1);
+            label.font = UIFontWeightBoldSize(16);
+            [self.addSubview(label) mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(JobsWidth(18));
+                make.left.equalTo(self).offset(JobsWidth(16));
+                make.top.equalTo(self).offset(JobsWidth(5));
+            }];
+        });
     }
     _titleLab.text = self.viewModel.textModel.text;
     [_titleLab makeLabelByShowingType:UILabelShowingType_03];

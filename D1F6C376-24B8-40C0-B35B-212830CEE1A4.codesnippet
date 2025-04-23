@@ -11,51 +11,44 @@
 	<key>IDECodeSnippetContents</key>
 	<string>-(JobsTextField *)textField{
     if(!_textField){
-        _textField = JobsTextField.new;
-        _textField.backgroundColor = JobsRedColor;
-        // 只针对真实的textField配置
-        _textField.realTextFieldBgCor = JobsClearColor;
-        _textField.leftViewByOutLineOffset = JobsWidth(4);
-        _textField.leftViewByTextFieldOffset = JobsWidth(4);
-        _textField.rightViewByTextFieldOffset = JobsWidth(4);
-        _textField.rightViewByOutLineOffset = JobsWidth(4);
-        _textField.returnKeyType = UIReturnKeyDefault;
-        _textField.keyboardAppearance = UIKeyboardAppearanceDefault;
-        _textField.keyboardType = UIKeyboardTypeDefault;
-        _textField.leftViewMode = UITextFieldViewModeNever;
-        _textField.rightViewMode = UITextFieldViewModeNever;
-        _textField.leftView = self.textFieldLeftView;
-        _textField.rightView = self.textFieldRightView;
-        _textField.placeholder = JobsInternationalization(@"wwe");
-        _textField.placeholderColor = JobsWhiteColor;
-        _textField.placeholderFont = UIFontWeightSemiboldSize(12);
-        _textField.attributedPlaceholder = nil;
-        _textField.layoutSubviewsRectCorner = UIRectCornerAllCorners;
-        _textField.layoutSubviewsRectCornerSize = CGSizeMake(JobsWidth(8), JobsWidth(8));
-        // 真实的textField，输入回调（每次输入的字符），如果要当前textField的字符，请取值textField.text
         @jobs_weakify(self)
-        [_textField actionReturnObjectBlock:^id _Nullable(id _Nullable data) {
+        _textField = makeJobsTextField(^(__kindof JobsTextField * _Nullable data) {
             @jobs_strongify(self)
-            NSLog(@"ddf = %@",data);
-            return nil;
-        }];
-        [self addSubview:_textField];
-        [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(JobsWidth(148), JobsWidth(28)));
-            make.centerY.equalTo(self);
-            if (self.vipClassImageView.right &gt;= self.userNameLab.right) {
-                make.left.equalTo(self.vipClassImageView.mas_right).offset(JobsWidth(18));
-            }else{
-                make.left.equalTo(self.userNameLab.mas_right).offset(JobsWidth(18));
-            }
-        }];
-        [_textField richElementsInViewWithModel:nil];
-        [self layoutIfNeeded];
-        // 最外层的UI-描边
-        [_textField layerBorderCor:JobsCor(@"#FFD8D8")
-                    andBorderWidth:JobsWidth(1)];
-        // 最外层的UI-切全角
-        _textField.cornerCutToCircleWithCornerRadius:JobsWidth(8);
+            data.backgroundColor = JobsClearColor;
+            data.leftViewByOutLineOffset = JobsWidth(4);
+            data.rightViewByTextFieldOffset = JobsWidth(8);
+            // 只针对真实的textField配置
+            data.leftView = jobsMakeImageView(^(__kindof UIImageView * _Nullable imageView) {
+                imageView.image = JobsIMG(@"🔍");
+            });
+            data.realTextFieldBgCor = JobsCor(@"F5F5F5");
+            data.titleCor = JobsCor(@"#788190");
+            data.leftViewByOutLineOffset = JobsWidth(4);
+            data.leftViewByTextFieldOffset = JobsWidth(10);
+            data.rightViewByTextFieldOffset = JobsWidth(4);
+            data.rightViewByOutLineOffset = JobsWidth(14);
+            data.returnKeyType = UIReturnKeyDefault;
+            data.keyboardAppearance = UIKeyboardAppearanceDefault;
+            data.keyboardType = UIKeyboardTypeDefault;
+            data.leftViewMode = UITextFieldViewModeNever;
+            data.rightViewMode = UITextFieldViewModeNever;
+            data.textFieldPlaceholder = JobsInternationalization(@"Search Games");
+            data.placeholderColor = JobsCor(@"#788190");
+            data.placeholderFont = UIFontWeightRegularSize(12);
+            data.attributedPlaceholder = nil;
+            data.layoutSubviewsRectCorner = UIRectCornerAllCorners;
+            data.layoutSubviewsRectCornerSize = CGSizeMake(JobsWidth(8), JobsWidth(8));
+            // 真实的textField，输入回调（每次输入的字符），如果要当前textField的字符，请取值textField.text
+            [data actionObjBlock:^(id  _Nullable data) {
+                JobsLog(@"ddf = %@",data);
+            }];
+            self.addSubview(data);
+            [data mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.announcementView);
+                make.top.equalTo(self.announcementView.mas_bottom).offset(JobsWidth(5));
+                make.height.mas_equalTo(JobsWidth(22));
+            }];data.jobsRichViewByModel(nil);
+        });
     }return _textField;
 }</string>
 	<key>IDECodeSnippetIdentifier</key>

@@ -16,10 +16,10 @@ BaseViewProtocol
 &gt;
 
 /// UI
-@property(nonatomic,strong)UITableView *tableView;
+Prop_strong()UITableView *tableView;
 /// Data
-@property(nonatomic,strong)NSMutableArray &lt;__kindof UITableViewCell *&gt;*tbvCellMutArr;
-@property(nonatomic,strong)NSMutableArray &lt;__kindof UIViewModel *&gt;*dataMutArr;
+Prop_strong()NSMutableArray &lt;__kindof UITableViewCell *&gt;*tbvCellMutArr;
+Prop_strong()NSMutableArray &lt;__kindof UIViewModel *&gt;*dataMutArr;
 
 #pragma mark —— 一些私有方法
 -(void)layoutSubviews{
@@ -305,8 +305,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 -(NSMutableArray&lt;__kindof UITableViewCell *&gt; *)tbvCellMutArr{
     if (!_tbvCellMutArr) {
-        _tbvCellMutArr = NSMutableArray.array;
-        _tbvCellMutArr.jobsAddObject(JobsBtnsStyleTBVCell.cellStyleValue1WithTableView(self.tableView));
+        @jobs_weakify(self)
+        _tbvCellMutArr = jobsMakeMutArr(^(__kindof NSMutableArray&lt;NSObject *&gt; * _Nullable arr) {
+            @jobs_strongify(self)
+            arr.add(JobsBtnsStyleTBVCell.cellStyleValue1WithTableView(self.tableView));
+        });
     }return _tbvCellMutArr;
 }
 

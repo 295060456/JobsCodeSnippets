@@ -30,13 +30,13 @@
      _collectionView.tapGR.enabled = YES;/// 必须在设置完Target和selector以后方可开启执行
  }
  
- @property(nonatomic,strong)UILongPressGestureRecognizer *longPressGR;/// 长按手势
- @property(nonatomic,strong)UITapGestureRecognizer *tapGR;/// 点击手势
- @property(nonatomic,strong)UISwipeGestureRecognizer *swipeGR;/// 轻扫手势
- @property(nonatomic,strong)UIPanGestureRecognizer *panGR;/// 平移手势
- @property(nonatomic,strong)UIPinchGestureRecognizer *pinchGR;/// 捏合（缩放）手势
- @property(nonatomic,strong)UIRotationGestureRecognizer *rotationGR;/// 旋转手势
- @property(nonatomic,strong)UIScreenEdgePanGestureRecognizer *screenEdgePanGR;/// 屏幕边缘平移
+ Prop_strong()UILongPressGestureRecognizer *longPressGR;/// 长按手势
+ Prop_strong()UITapGestureRecognizer *tapGR;/// 点击手势
+ Prop_strong()UISwipeGestureRecognizer *swipeGR;/// 轻扫手势
+ Prop_strong()UIPanGestureRecognizer *panGR;/// 平移手势
+ Prop_strong()UIPinchGestureRecognizer *pinchGR;/// 捏合（缩放）手势
+ Prop_strong()UIRotationGestureRecognizer *rotationGR;/// 旋转手势
+ Prop_strong()UIScreenEdgePanGestureRecognizer *screenEdgePanGR;/// 屏幕边缘平移
 
  */</string>
 	<key>IDECodeSnippetIdentifier</key>
