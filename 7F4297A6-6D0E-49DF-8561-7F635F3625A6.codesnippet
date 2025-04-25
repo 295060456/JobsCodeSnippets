@@ -36,14 +36,7 @@
                 data1.textCor = JobsWhiteColor;
                 data1.targetString = JobsInternationalization(@"让程序员更加专注于").add(@"\n");
                 data1.textBgCor = JobsBrownColor;
-                data1.paragraphStyle = jobsMakeParagraphStyle(^(NSMutableParagraphStyle * _Nullable data2) {
-                    data2.alignment = NSTextAlignmentJustified;
-                    data2.paragraphSpacing = 0;//段距，取值 float
-                    data2.paragraphSpacingBefore = 0;//段首空间，取值 float
-                    data2.firstLineHeadIndent = 0.0;//首行缩进，取值 float
-                    data2.headIndent = 0.0;//整体缩进(首行除外)，取值 float
-                    data2.lineSpacing = 0;//行距，取值 float
-                });
+                data1.paragraphStyle = self.defaultParagraphStyle;
             }));
             data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig * _Nullable data1) {
                 @jobs_strongify(self)
@@ -51,14 +44,7 @@
                 data1.textCor = JobsGreenColor;
                 data1.targetString = JobsInternationalization(@"APP的业务。");
                 data1.textBgCor = JobsBrownColor;
-                data1.paragraphStyle = jobsMakeParagraphStyle(^(NSMutableParagraphStyle * _Nullable data2) {
-                    data2.alignment = NSTextAlignmentJustified;
-                    data2.paragraphSpacing = 0;//段距，取值 float
-                    data2.paragraphSpacingBefore = 0;//段首空间，取值 float
-                    data2.firstLineHeadIndent = 0.0;//首行缩进，取值 float
-                    data2.headIndent = 0.0;//整体缩进(首行除外)，取值 float
-                    data2.lineSpacing = 0;//行距，取值 float
-                });
+                data1.paragraphStyle = self.defaultParagraphStyle;
             }));
         }));
     }return _attributedText;

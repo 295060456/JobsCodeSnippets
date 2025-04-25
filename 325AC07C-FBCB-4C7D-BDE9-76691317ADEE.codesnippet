@@ -74,22 +74,15 @@ Prop_copy()NSMutableArray &lt;UIViewModel *&gt;*dataMutArr;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-viewForSupplementaryElementOfKind:(NSString *)kind
-atIndexPath:(NSIndexPath *)indexPath {
-    if (kind.isEqualToString(UICollectionElementKindSectionHeader)) {
-        JobsHeaderFooterView *headerView = [collectionView UICollectionElementKindSectionHeaderClass:JobsHeaderFooterView.class
-                                                                                        forIndexPath:indexPath];
-        headerView.jobsRichViewByModel(jobsMakeMutArr(^(__kindof NSMutableArray &lt;NSMutableArray &lt;__kindof UIViewModel *&gt;*&gt;* _Nullable arr0) {
-            arr0.add(jobsMakeMutArr(^(__kindof NSMutableArray &lt;__kindof UIViewModel *&gt;* _Nullable arr1) {
-                arr1.add(jobsMakeViewModel(^(__kindof UIViewModel * _Nullable viewModel) {
-                    viewModel.textModel.text = JobsInternationalization(@"请快速选择金额(元)");
-                }));
-            }));
-        })[indexPath.section]);
-        return headerView;
-    }else if (kind.isEqualToString(UICollectionElementKindSectionFooter)) {
-        ReturnBaseCollectionReusableFooterView
-    }else ReturnBaseCollectionReusableHeaderView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
+    if (kind == UICollectionElementKindSectionHeader) {
+        return [collectionView UICollectionElementKindSectionHeaderClass:JobsHeaderFooterView.class
+                                                            forIndexPath:indexPath].JobsRichViewByModel2(self.dataModel.headerViewModel);
+    }else if (kind == UICollectionElementKindSectionFooter) {
+        return [collectionView UICollectionElementKindSectionFooterClass:JobsHeaderFooterView.class
+                                                            forIndexPath:indexPath].JobsRichViewByModel2(self.dataModel.footerViewModel);
+    }else ReturnBaseCollectionReusableHeaderView;
 }
 #pragma mark —— UICollectionViewDelegate
 /// 允许选中时，高亮
