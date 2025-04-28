@@ -31,6 +31,8 @@
 #pragma mark —— BaseCellProtocol
 +(instancetype)cellWithCollectionView:(nonnull UICollectionView *)collectionView
                          forIndexPath:(nonnull NSIndexPath *)indexPath{
+    FMPromoCVCell *cell = JobsRegisterDequeueCollectionViewCell(FMPromoCVCell);
+                             或者
     FMPromoCVCell *cell = (FMPromoCVCell *)[collectionView collectionViewCellClass:FMPromoCVCell.class forIndexPath:indexPath];
     if (!cell) {
         collectionView.registerCollectionViewCellClass(FMPromoCVCell.class,@"");
