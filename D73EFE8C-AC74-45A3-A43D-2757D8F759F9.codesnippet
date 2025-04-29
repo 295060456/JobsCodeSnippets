@@ -77,26 +77,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     JobsBaseTableViewCell *cell = JobsBaseTableViewCell.cellStyleDefaultWithTableView(tableView);
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.indexPath = indexPath;
-    cell.jobsRichElementsCellBy(nil);
-             
-//    {
-//        BaseTableViewCell *cell = (BaseTableViewCell *)self.tableViewCellMutArr[indexPath.section][indexPath.row];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//         cell.indexPath = indexPath;
-//         switch (indexPath.section) {
-//             case 0:
-//                 cell.jobsRichElementsInCellWithModel(nil);
-//                 break;
-//             case 1:
-//             case 2:
-//                 cell.jobsRichElementsInCellWithModel(self.dataMutArr[indexPath.section - 1][indexPath.row]);
-//                 break;
-//             default:
-//                 cell.jobsRichElementsInCellWithModel(nil);
-//                 break;
-//         }
-//     }
-    return cell;
+    // cell.jobsRichElementsCellBy(nil);
+    cell.JobsRichViewByModel2(self.datas[indexPath.row]).JobsBlock1(^(id _Nullable data) {
+        if(@available(iOS 17.0, *)) {
+            if([data isKindOfClass:UITextItem.class]){
+                toast(JobsInternationalization(@"BSPORTS Terms of Use"));
+            }
+        }
+    });return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
