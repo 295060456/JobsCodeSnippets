@@ -9,24 +9,55 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>-(UITextView *)tipsTextView{
-    if (!_tipsTextView) {
+	<string>&lt;UITextViewDelegate&gt;
+@synthesize textView = _textView;
+-(UITextView *)textView{
+    if(!_textView){
         @jobs_weakify(self)
-        _tipsTextView = jobsMakeTextView(^(__kindof UITextView * _Nullable textView) {
+        _textView = jobsMakeTextView(^(__kindof UITextView * _Nullable textView) {
             @jobs_strongify(self)
             textView.delegate = self;
-            textView.editable = NO;/// 必须禁止输入，否则点击将会弹出输入键盘
-            textView.scrollEnabled = NO;/// 可选的，视具体情况而定
-            textView.linkTextAttributes = @{NSForegroundColorAttributeName:HEXCOLOR(0xCCB17E)};/// 链接文字颜色
-            textView.attributedText = self.attributedStringData;
-            textView.userInteractionEnabled = YES;
-            [self.contentView.addSubview(textView) mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(JobsMainScreen_WIDTH(), JobsWidth(30)));
-                make.centerX.equalTo(self.contentView);
-                make.bottom.equalTo(self.contentView).offset(-JobsWidth(38));
+            textView.scrollEnabled = NO;
+            textView.dataDetectorTypes = UIDataDetectorTypeLink; /// 启用链接检测
+            textView.editable = NO; /// 禁止编辑。必须 editable = NO 才能点击链接跳转
+            textView.selectable = YES; /// 允许选择链接
+            textView.backgroundColor = JobsClearColor;
+            textView.attributedText = self.richTextWithDataConfigMutArr(jobsMakeMutArr(^(__kindof NSMutableArray *_Nullable data) {
+                data.add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig *_Nullable data1) {
+                    @jobs_strongify(self)
+                    data1.font = UIFontWeightBoldSize(JobsWidth(14));
+                    data1.textCor = JobsCor(@"#6B6B6B");
+                    data1.targetString = JobsInternationalization(@"Please read our").uppercaseString.add(JobsSpace);
+                    data1.paragraphStyle = self.defaultParagraphStyle;
+                }))
+                .add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig *_Nullable data1) {
+                    @jobs_strongify(self)
+                    data1.font = UIFontWeightBoldSize(JobsWidth(14));
+                    data1.textCor = JobsCor(@"#FFCC00");
+                    data1.targetString = JobsInternationalization(@"Pesponsible Game").uppercaseString;
+                    data1.underlineCor = JobsCor(@"#FFCC00");
+                    data1.underlineStyle = NSUnderlineStyleSingle;
+                    data1.paragraphStyle = self.defaultParagraphStyle;
+                    data1.urlStr = @"myapp://responsible_gaming";/// 这里必须是一个URL形式的字符串，SDK框架内部才能识别处理，并执行协议方法
+                }))
+                .add(jobsMakeRichTextConfig(^(__kindof JobsRichTextConfig *_Nullable data1) {
+                    @jobs_strongify(self)
+                    data1.font = UIFontWeightBoldSize(JobsWidth(14));
+                    data1.textCor = JobsCor(@"#6B6B6B");;
+                    data1.targetString = JobsSpace.add(JobsInternationalization(@"carefully:").uppercaseString);
+                    data1.paragraphStyle = self.defaultParagraphStyle;
+                }));
+            }));
+            /// 修改textView超链接的文字颜色
+            /// UITextView 默认会对 NSLinkAttributeName 使用蓝色和下划线，如果不设置 linkTextAttributes 会覆盖你自定义的颜色。
+            textView.linkTextAttributes = self.makeLinkTextAttributes;
+            [self.bgImageView.addSubview(textView) mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.bgImageView);
+                make.top.equalTo(self.bgImageView).offset(JobsWidth(76));
+                make.size.mas_equalTo(CGSizeMake(JobsWidth(310), JobsWidth(60)));
             }];
         });
-    }return _tipsTextView;
+    }return _textView;
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>4D0DAE94-AD5F-449C-826C-C87EDDE4C83D</string>

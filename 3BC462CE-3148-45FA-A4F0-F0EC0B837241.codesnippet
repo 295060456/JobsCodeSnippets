@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#import &lt;PDFKit/PDFKit.h&gt; /// 处理PDF
+
+@synthesize pdfView = _pdfView;
+-(__kindof PDFView *)pdfView{
+    if(!_pdfView){
+        @jobs_weakify(self)
+        _pdfView = jobsMakePDFView(^(__kindof PDFView * _Nullable view) {
+            @jobs_strongify(self)
+            view.autoScales = YES;
+            view.document = PDFDocument.byURL([NSBundle.mainBundle URLForResource:@"Terms of Use" withExtension:@"pdf"]);
+            [self.addSubview(view) mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self);
+                make.top.equalTo(self.label.mas_bottom).offset(JobsWidth(10));
+                make.size.mas_equalTo(CGSizeMake(JobsWidth(290), JobsWidth(300)));
+            }];
+        });
+    }return _pdfView;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3BC462CE-3148-45FA-A4F0-F0EC0B837241</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>PDF的处理</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>PDF</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
