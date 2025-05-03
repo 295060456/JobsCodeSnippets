@@ -52,12 +52,18 @@ Prop_copy()NSMutableArray &lt;UIViewModel *&gt;*dataMutArr;
                           block1:^{
         @jobs_strongify(self)
         BaiShaETProjCountdownCVCell *cell = [BaiShaETProjCountdownCVCell cellWithCollectionView:collectionView forIndexPath:indexPath];
-        cell.jobsRichElementsInCellWithModel(self.dataMutArr[indexPath.section]);
+        cell.JobsRichViewByModel2(self.dataMutArr[indexPath.section])
+            .JobsBlock1(^(id _Nullable data) {
+             
+            });
         return cell;
     }block2:^{
         @jobs_strongify(self)
         BaiShaETProjOrderDetailsCVCell *cell = [BaiShaETProjOrderDetailsCVCell cellWithCollectionView:collectionView forIndexPath:indexPath];
-        cell.jobsRichElementsInCellWithModel(self.dataMutArr[indexPath.section]);
+        cell.JobsRichViewByModel2(self.dataMutArr[indexPath.section])
+            .JobsBlock1(^(id _Nullable data) {
+             
+            });
         return cell;
     }block3:^{
         ReturnBaseCollectionViewCell;
@@ -76,13 +82,18 @@ Prop_copy()NSMutableArray &lt;UIViewModel *&gt;*dataMutArr;
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
-    if (kind == UICollectionElementKindSectionHeader) {
-        return [collectionView UICollectionElementKindSectionHeaderClass:JobsHeaderFooterView.class
-                                                            forIndexPath:indexPath].JobsRichViewByModel2(self.dataModel.headerViewModel);
-    }else if (kind == UICollectionElementKindSectionFooter) {
-        return [collectionView UICollectionElementKindSectionFooterClass:JobsHeaderFooterView.class
-                                                            forIndexPath:indexPath].JobsRichViewByModel2(self.dataModel.footerViewModel);
-    }else ReturnBaseCollectionReusableHeaderView;
+    if (kind.isEqualToString(UICollectionElementKindSectionFooter)) {
+        if (indexPath.section == self.cvcellMutArr.count - 1) {
+            return [collectionView UICollectionElementKindSectionFooterClass:BaiShaETProjVIPSubCVFooterView.class
+                                                                forIndexPath:indexPath].JobsRichViewByModel2(jobsMakeViewModel(^(__kindof UIViewModel * _Nullable viewModel) {
+                viewModel.textModel.text = JobsInternationalization(@"查看VIP規則");
+            }));
+        }else ReturnBaseCollectionReusableHeaderView
+    }else{
+        return [collectionView UICollectionElementKindSectionHeaderClass:BaseCollectionReusableView.class
+                                                            forIndexPath:indexPath].JobsRichViewByModel2(jobsMakeViewModel(^(__kindof UIViewModel * _Nullable viewModel) {
+        }));;
+    }
 }
 #pragma mark —— UICollectionViewDelegate
 /// 允许选中时，高亮
