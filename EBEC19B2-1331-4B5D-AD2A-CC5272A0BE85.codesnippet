@@ -90,6 +90,20 @@ static dispatch_once_t static_tipsView01OnceToken;
 }
 #pragma mark —— lazyLoad
 
+-(FMLoginByPhoneView *)phoneView{
+    if(!_phoneView){
+        _phoneView = self.view.addSubview(FMLoginByPhoneView
+                                          .JobsRichViewByModel(nil)
+                                          .JobsBlock1(^(id _Nullable data) {
+                                         
+                                     })).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
+                                         make.top.equalTo(self.titleLab.mas_bottom).offset(JobsWidth(5));
+                                         make.left.equalTo(self.view).offset(JobsWidth(10));
+                                         make.size.mas_equalTo(FMLoginByPhoneView.viewSizeByModel(nil));
+                                     }).on();
+    }return _phoneView;
+}
+
 -(FMLoginByUsrNameView *)loginByUsrNameView{
     if(!_loginByUsrNameView){
         _loginByUsrNameView = FMLoginByUsrNameView
@@ -99,6 +113,27 @@ static dispatch_once_t static_tipsView01OnceToken;
                 
             });
     }return _loginByUsrNameView;
+}
+
+-(BaseButton *)forgotten_code_btn{
+    if(!_forgotten_code_btn){
+        @jobs_weakify(self)
+        _forgotten_code_btn = self.addSubview(BaseButton.jobsInit()
+                                              .bgColorBy(JobsClearColor)
+                                              .jobsResetBtnTitleCor(JobsCor(@"#FF0000"))
+                                              .jobsResetBtnTitleFont(pingFangHKRegular(JobsWidth(13)))
+                                              .jobsResetBtnTitle(JobsInternationalization(@"Forgot Password?"))
+                                              .onClickBy(^(UIButton *x){
+                                                  @jobs_strongify(self)
+                                                  self.getCurrentViewController.comingToPushVC(FMForgotPwdVC.new);
+                                              }).onLongPressGestureBy(^(id data){
+                                                  JobsLog(@"");
+                                              })).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
+                                                  make.top.equalTo(self.textField_code.mas_bottom).offset(JobsWidth(5));
+                                                  make.right.equalTo(self.textField_code);
+                                                  make.size.mas_equalTo(CGSizeMake(JobsWidth(130), JobsWidth(15)));
+                                              }).on();
+    }return _forgotten_code_btn;
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>EBEC19B2-1331-4B5D-AD2A-CC5272A0BE85</string>
