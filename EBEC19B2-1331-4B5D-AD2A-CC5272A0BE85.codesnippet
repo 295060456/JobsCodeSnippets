@@ -9,9 +9,8 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>
+	<string>/// AppToolsProtocol
 @synthesize viewModel = _viewModel;
-
 #pragma mark —— BaseProtocol
 /// 单例化和销毁
 +(void)destroySingleton{
