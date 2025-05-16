@@ -95,13 +95,14 @@ heightForFooterInSection:(NSInteger)section{
 /// tableView.registerHeaderFooterViewClass(BaseTableViewHeaderFooterView.class,@"");
 - (nullable __kindof UIView *)tableView:(UITableView *)tableView
                  viewForHeaderInSection:(NSInteger)section{
-    if (self.viewModel.usesTableViewHeaderView) {
-        return BaseTableViewHeaderFooterView
-            .initByReuseIdentifier(@"")
-            .byStyle(JobsHeaderViewStyle)/// 不写这三句有悬浮 1
-            .bySection(section)/// 不写这三句有悬浮 2
-            .byTableView(tableView)/// 不写这三句有悬浮 2
-            .JobsRichViewByModel2(nil)
+    if(self.viewModel.usesTableViewFooterView){
+        /// 什么不配置就是悬浮
+        /// JobsHeaderFooterViewStyleNone 还是悬浮
+        /// JobsHeaderViewStyle 不是悬浮
+        return BaseTableViewHeaderFooterView.initByReuseIdentifier(tableView,@"")
+            .byStyle(JobsHeaderViewStyle)/// 悬浮开关
+            .bySection(section)/// 悬浮配置
+            .JobsRichViewByModel2(self.titleDatas[section])
             .JobsBlock1(^(id _Nullable data) {
                 
             });
@@ -112,18 +113,16 @@ heightForFooterInSection:(NSInteger)section{
 - (nullable __kindof UIView *)tableView:(UITableView *)tableView
                  viewForFooterInSection:(NSInteger)section{
     if(self.viewModel.usesTableViewFooterView){
-        BaseTableViewHeaderFooterView *tbvFooterView = BaseTableViewHeaderFooterView
-            .initByReuseIdentifier(@"")
-            .byStyle(JobsFooterViewStyle)/// 不写这三句有悬浮 1
-            .bySection(section)/// 不写这三句有悬浮 2
-            .byTableView(tableView)/// 不写这三句有悬浮 2
-            .JobsRichViewByModel2(nil)
+        /// 什么不配置就是悬浮
+        /// JobsHeaderFooterViewStyleNone 还是悬浮
+        /// JobsHeaderViewStyle 不是悬浮
+        return BaseTableViewHeaderFooterView.initByReuseIdentifier(tableView,@"")
+            .byStyle(JobsHeaderViewStyle)/// 悬浮开关
+            .bySection(section)/// 悬浮配置
+            .JobsRichViewByModel2(self.titleDatas[section])
             .JobsBlock1(^(id _Nullable data) {
                 
             });
-        tbvFooterView.backgroundColor = HEXCOLOR(0xEAEBED);
-        tbvFooterView.backgroundView.backgroundColor = HEXCOLOR(0xEAEBED);
-        return tbvFooterView;
     }return nil;
 }
 /**
