@@ -20,49 +20,65 @@ _tableView.tableFooterView;
 # UICollectionView 没有类型相关的东西
 
 
+tableView.registerHeaderFooterViewClass(FMInBoxTableViewHeaderView.class,@"");
+
 #import "BaseViewProtocol.h"
 #import "UIViewModelOthersProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FMTBVHeaderFooterView1 : UITableViewHeaderFooterView
+@interface FMInBoxTableViewHeaderView : UITableViewHeaderFooterView
 &lt;BaseViewProtocol,UIViewModelOthersProtocol&gt;
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "FMTBVHeaderFooterView1.h"
+#import "FMInBoxTableViewHeaderView.h"
 
-@interface FMTBVHeaderFooterView1 ()
-/// UI
-Prop_strong()UILabel *titleLab;
+@interface FMInBoxTableViewHeaderView ()
 
 @end
 
-@implementation FMTBVHeaderFooterView1
+@implementation FMInBoxTableViewHeaderView
 @synthesize viewModel = _viewModel;
-/// 具体由子类进行复写【数据定UI】【如果所传参数为基本数据类型，那么包装成对象NSNumber进行转化承接】
--(void)richElementsInViewWithModel:(id _Nullable)model{
-    self.contentView.backgroundColor = self.backgroundColor = JobsClearColor.colorWithAlphaComponent(0);
-    if([model isKindOfClass:UIViewModel.class]){
-        self.viewModel = (UIViewModel *)model;
-    }
-    self.titleLab.alpha = 1;
+-(instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier{
+    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        /// self.backgroundColor 和  self.contentView.backgroundColor 均是无效操作❌
+        /// 只有 self.backgroundView.backgroundColor 是有效操作✅
+        /// 默认情况下，backgroundView 是 nil
+        self.backgroundView = UIView.initByFrame(self.bounds);
+    }return self;
 }
-#pragma mark —— lazyLoad
--(UILabel *)titleLab{
-    if(!_titleLab){
-        @jobs_weakify(self)
-        _titleLab = jobsMakeLabel(^(__kindof UILabel * _Nullable label) {
-            @jobs_strongify(self)
-            label.byText(self.viewModel.text)
-                .byFont(self.viewModel.font)
-                .byTextCor(self.viewModel.textCor)
-            [self.contentView.addSubview(label) mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(self.contentView);
-            }];
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    /// 内部指定圆切角
+    [self appointCornerCutToCircleByRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                        cornerRadii:CGSizeMake(JobsWidth(8), JobsWidth(8))];
+}
+
+-(jobsByIDBlock _Nonnull)jobsRichViewByModel{
+    @jobs_weakify(self)
+    return ^(NSString *_Nullable data) {
+        @jobs_strongify(self)
+        self.backgroundColor = JobsCor(@"#E2E2E2");
+        self.label.byText(data);
+    };
+}
+/// BaseViewProtocol
+@synthesize label = _label;
+-(__kindof UILabel *)label{
+    if(!_label){
+        _label = self.contentView.addSubview(jobsMakeLabel(^(__kindof UILabel * _Nullable label) {
+            label.byTextCor(JobsCor(@"#878787"))
+                .byFont(pingFangHKRegular(JobsWidth(16)))
+                .byTextAlignment(NSTextAlignmentCenter);
+        })).masonryBy(^(MASConstraintMaker *_Nonnull make){
+            make.right.equalTo(self.contentView).offset(JobsWidth(-12));
+            make.centerY.equalTo(self.contentView);
         });
-    }return _titleLab;
+        _label.makeLabelByShowingType(UILabelShowingType_03);
+    }return _label;
 }
 
 @end

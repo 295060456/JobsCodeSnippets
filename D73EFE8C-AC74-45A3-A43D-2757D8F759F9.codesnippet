@@ -92,32 +92,38 @@ heightForFooterInSection:(NSInteger)section{
     return section ? [BaseTableViewHeaderFooterView heightForFooterInSection:nil] : JobsWidth(10);
 }
 /// 这里涉及到复用机制，return出去的是UITableViewHeaderFooterView的派生类
+/// tableView.registerHeaderFooterViewClass(BaseTableViewHeaderFooterView.class,@"");
 - (nullable __kindof UIView *)tableView:(UITableView *)tableView
                  viewForHeaderInSection:(NSInteger)section{
     if (self.viewModel.usesTableViewHeaderView) {
-        BaseTableViewHeaderFooterView *headerView = BaseTableViewHeaderFooterView.jobsInitWithReuseIdentifier;
-        headerView.section = section;// 不写这一句有悬浮
-        [headerView richElementsInViewWithModel:nil];
-        @jobs_weakify(self)
-        [headerView actionObjectBlock:^(id data) {
-            @jobs_strongify(self)
-        }];return headerView;
+        return BaseTableViewHeaderFooterView
+            .initByReuseIdentifier(@"")
+            .byStyle(JobsHeaderViewStyle)/// 不写这三句有悬浮 1
+            .bySection(section)/// 不写这三句有悬浮 2
+            .byTableView(tableView)/// 不写这三句有悬浮 2
+            .JobsRichViewByModel2(nil)
+            .JobsBlock1(^(id _Nullable data) {
+                
+            });
     }return nil;
 }
 /// 这里涉及到复用机制，return出去的是UITableViewHeaderFooterView的派生类
+/// tableView.registerHeaderFooterViewClass(BaseTableViewHeaderFooterView.class,@"");
 - (nullable __kindof UIView *)tableView:(UITableView *)tableView
                  viewForFooterInSection:(NSInteger)section{
     if(self.viewModel.usesTableViewFooterView){
-        BaseTableViewHeaderFooterView *tbvFooterView = BaseTableViewHeaderFooterView.jobsInitWithReuseIdentifier;
-        tbvFooterView.section = section;// 不写这一句有悬浮
+        BaseTableViewHeaderFooterView *tbvFooterView = BaseTableViewHeaderFooterView
+            .initByReuseIdentifier(@"")
+            .byStyle(JobsFooterViewStyle)/// 不写这三句有悬浮 1
+            .bySection(section)/// 不写这三句有悬浮 2
+            .byTableView(tableView)/// 不写这三句有悬浮 2
+            .JobsRichViewByModel2(nil)
+            .JobsBlock1(^(id _Nullable data) {
+                
+            });
         tbvFooterView.backgroundColor = HEXCOLOR(0xEAEBED);
         tbvFooterView.backgroundView.backgroundColor = HEXCOLOR(0xEAEBED);
-        
-        [tbvFooterView richElementsInViewWithModel:nil];
-        @jobs_weakify(self)
-        [tbvFooterView actionObjectBlock:^(id data) {
-            @jobs_strongify(self)
-        }];return tbvFooterView;
+        return tbvFooterView;
     }return nil;
 }
 /**
@@ -204,7 +210,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                 /// 这里接入的就是一个UIView的派生类。只需要赋值Frame，不需要addSubview
             });
             tableView.contentInset = UIEdgeInsetsMake(0, 0, JobsBottomSafeAreaHeight(), 0);
-            tableView.registerHeaderFooterViewClass(MSCommentTableHeaderFooterView.class,nil);
+            tableView.registerHeaderFooterViewClass(BaseTableViewHeaderFooterView.class,@"");
             [tableView registerTableViewClass];
             if(@available(iOS 11.0, *)) {
                 tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
