@@ -225,11 +225,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             }
             
             {
+//                tableView.showEmptyViewBy(FMMaintenanceView
+//                                          .BySize(FMMaintenanceView.viewSizeByModel(nil))
+//                                          .JobsRichViewByModel2(nil)
+//                                          .JobsBlock1(^(id  _Nullable data) {
+//
+//                                          }));
+                
                 tableView.buttonModelEmptyData = jobsMakeButtonModel(^(__kindof UIButtonModel * _Nullable data) {
-                    data.title = JobsInternationalization(@"NO MESSAGES FOUND");
+                    data.title = JobsInternationalization(@"No Datas");
                     data.titleCor = JobsWhiteColor;
                     data.titleFont = bayonRegular(JobsWidth(30));
-                    data.normalImage = JobsIMG(@"小狮子");
+                    data.normalImage = JobsIMG(@"暂无数据");
+                    data.baseBackgroundColor = JobsClearColor.colorWithAlphaComponentBy(0);
+                    data.jobsOffsetX = JobsWidth(-100);
+                    data.jobsOffsetY = 0;
                 });
             }
             

@@ -248,12 +248,19 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
         }
         
         {
-            _collectionView.buttonModelEmptyData = jobsMakeButtonModel(^(__kindof UIButtonModel * _Nullable data) {
-                data.title = JobsInternationalization(@"NO BANK CARD FOUND");
-                data.titleCor = JobsWhiteColor;
-                data.titleFont = bayonRegular(JobsWidth(30));
-                data.normalImage = JobsIMG(@"小狮子");
-            });
+            _collectionView.showEmptyViewBy(FMMaintenanceView
+                                            .BySize(FMMaintenanceView.viewSizeByModel(nil))
+                                            .JobsRichViewByModel2(nil)
+                                            .JobsBlock1(^(id  _Nullable data) {
+                                                
+                                            }));
+        
+//            _collectionView.buttonModelEmptyData = jobsMakeButtonModel(^(__kindof UIButtonModel * _Nullable data) {
+//                data.title = JobsInternationalization(@"NO MESSAGES FOUND");
+//                data.titleCor = JobsWhiteColor;
+//                data.titleFont = bayonRegular(JobsWidth(30));
+//                data.normalImage = JobsIMG(@"小狮子");
+//            });
         }
 
 //        {
