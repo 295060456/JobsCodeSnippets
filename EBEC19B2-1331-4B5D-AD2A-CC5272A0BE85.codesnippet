@@ -114,25 +114,29 @@ static dispatch_once_t static_tipsView01OnceToken;
     }return _loginByUsrNameView;
 }
 
--(BaseButton *)forgotten_code_btn{
-    if(!_forgotten_code_btn){
+-(UIButton *)statusBtn{
+    if(!_statusBtn){
         @jobs_weakify(self)
-        _forgotten_code_btn = self.addSubview(BaseButton.jobsInit()
-                                              .bgColorBy(JobsClearColor)
-                                              .jobsResetBtnTitleCor(JobsCor(@"#FF0000"))
-                                              .jobsResetBtnTitleFont(pingFangHKRegular(JobsWidth(13)))
-                                              .jobsResetBtnTitle(JobsInternationalization(@"Forgot Password?"))
-                                              .onClickBy(^(UIButton *x){
-                                                  @jobs_strongify(self)
-                                                  self.getCurrentViewController.comingToPushVC(FMForgotPwdVC.new);
-                                              }).onLongPressGestureBy(^(id data){
-                                                  JobsLog(@"");
-                                              })).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
-                                                  make.top.equalTo(self.textField_code.mas_bottom).offset(JobsWidth(5));
-                                                  make.right.equalTo(self.textField_code);
-                                                  make.size.mas_equalTo(CGSizeMake(JobsWidth(130), JobsWidth(15)));
-                                              }).on();
-    }return _forgotten_code_btn;
+        _statusBtn = self.addSubview(BaseButton.jobsInit()
+                                     .bgColorBy(JobsClearColor)
+                                     .jobsResetBtnTitleCor(JobsCor(@"#F53F3F"))
+                                     .jobsResetBtnTitleFont(pingFangHKRegular(JobsWidth(14)))
+                                     .jobsResetBtnTitle(JobsInternationalization(@"Unverified"))
+                                     .onClickBy(^(UIButton *x){
+                                         @jobs_strongify(self)
+                                         self.getCurrentViewController.comingToPushVC(FMForgotPwdVC.new);
+                                     }).onLongPressGestureBy(^(id data){
+                                         JobsLog(@"");
+                                     }).setLayerBy(jobsMakeLocationModel(^(__kindof JobsLocationModel * _Nullable data) {
+                                         data.layerCor = JobsCor(@"#F53F3F");
+                                         data.jobsWidth = 1;
+                                         data.cornerRadiusValue = JobsWidth(32 / 2);
+                                     }))).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
+                                         make.centerY.equalTo(self.titleLab);
+                                         make.right.equalTo(self).offset(JobsWidth(-15));
+                                         make.size.mas_equalTo(CGSizeMake(JobsWidth(86), JobsWidth(32)));
+        }).on();
+    }return _statusBtn;
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>EBEC19B2-1331-4B5D-AD2A-CC5272A0BE85</string>
