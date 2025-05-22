@@ -85,7 +85,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>基于BaseCellProtocol的UICollectionViewCell创建</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UICollectionViewCell</string>
+	<string>UICollectionViewCell</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

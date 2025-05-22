@@ -397,9 +397,9 @@ scrollingFromLeftIndex:(NSInteger)leftIndex
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>【DOC】JXCategoryView框架的使用</string>
+	<string>JXCategoryView框架的使用</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.JXCategoryView.normal</string>
+	<string>创建JXCategoryView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

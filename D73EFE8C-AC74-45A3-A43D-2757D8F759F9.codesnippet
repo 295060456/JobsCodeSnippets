@@ -322,7 +322,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UITableView的相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UITableView</string>
+	<string>UITableView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

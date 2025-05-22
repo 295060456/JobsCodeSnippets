@@ -145,7 +145,7 @@ static dispatch_once_t static_tipsView01OnceToken;
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UIView的相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UIView</string>
+	<string>UIView☀️</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

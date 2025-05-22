@@ -64,9 +64,9 @@ Prop_assign()CGRect editingRectForBounds;/// 重置编辑区域【编辑状态�
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>JobsMagicTextField</string>
+	<string>创建ZYTextField相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.ZYTextField</string>
+	<string>输入框@ZYTextField</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

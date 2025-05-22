@@ -43,7 +43,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>自定义通知的使用</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.NSNotification</string>
+	<string>通知</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

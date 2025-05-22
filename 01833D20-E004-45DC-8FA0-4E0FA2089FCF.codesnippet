@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string></string>
+	<string>init.keyboard</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -63,7 +63,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>摈弃IQKeyboardManager，直接用系统通知方法对键盘高度进行监听</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.keyboard</string>
+	<string>键盘监听🇨🇳</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

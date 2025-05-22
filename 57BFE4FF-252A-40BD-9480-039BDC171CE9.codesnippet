@@ -134,7 +134,7 @@ UIViewModelProtocol_synthesize
 	<key>IDECodeSnippetSummary</key>
 	<string>基于BaseCellProtocol的TBVCell创建</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UITableViewCell</string>
+	<string>UITableViewCell</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

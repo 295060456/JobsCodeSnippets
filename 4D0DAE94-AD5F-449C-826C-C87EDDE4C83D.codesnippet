@@ -68,7 +68,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UITextView相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UITextView</string>
+	<string>UITextView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

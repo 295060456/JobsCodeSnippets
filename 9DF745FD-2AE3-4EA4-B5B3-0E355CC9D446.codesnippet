@@ -80,9 +80,9 @@ JobsKey(_voidBlock)
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>分类加【数据】属性Demo</string>
+	<string>Demo</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>JobsCategoryProperties</string>
+	<string>分类加【数据】属性</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

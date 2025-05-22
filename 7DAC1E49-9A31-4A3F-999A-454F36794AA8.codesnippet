@@ -92,7 +92,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UIViewController的各个相关生命周期</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UIViewController.CycleLife</string>
+	<string>UIViewController</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

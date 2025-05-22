@@ -227,9 +227,9 @@ mainTableViewDidScroll:(UIScrollView *)scrollView{
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>JXCategoryView下拉headerView变大</string>
+	<string>下拉headerView变大</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.JXCategoryView.style</string>
+	<string>JXCategoryView@下拉headerView变大</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

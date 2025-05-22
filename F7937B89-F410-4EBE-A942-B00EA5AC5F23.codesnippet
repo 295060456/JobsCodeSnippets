@@ -122,9 +122,9 @@
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>猿题库-网络请求示例</string>
+	<string>猿题库</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.Network</string>
+	<string>网络请求（示例）</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

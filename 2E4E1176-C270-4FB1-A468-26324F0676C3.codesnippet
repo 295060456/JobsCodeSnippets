@@ -72,7 +72,7 @@ Prop_strong()UILabel *titleLab;
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.UICollectionViewHeaderAndFooterView</string>
+	<string>UICollectionViewHeaderAndFooterView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

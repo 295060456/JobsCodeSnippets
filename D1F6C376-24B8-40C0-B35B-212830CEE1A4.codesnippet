@@ -9,47 +9,61 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>-(JobsTextField *)textField{
-    if(!_textField){
+	<string>-(JobsTextField *)textField_birthDay{
+    if(!_textField_birthDay){
         @jobs_weakify(self)
-        _textField = makeJobsTextField(^(__kindof JobsTextField * _Nullable data) {
+        _textField_birthDay = self.scrollView.addSubview(makeJobsTextField(^(__kindof JobsTextField * _Nullable data) {
             @jobs_strongify(self)
-            data.backgroundColor = JobsClearColor;
-            data.leftViewByOutLineOffset = JobsWidth(4);
-            data.rightViewByTextFieldOffset = JobsWidth(8);
-            // 只针对真实的textField配置
-            data.leftView = jobsMakeImageView(^(__kindof UIImageView * _Nullable imageView) {
-                imageView.image = JobsIMG(@"🔍");
-            });
-            data.realTextFieldBgCor = JobsCor(@"F5F5F5");
-            data.titleCor = JobsCor(@"#788190");
-            data.leftViewByOutLineOffset = JobsWidth(4);
-            data.leftViewByTextFieldOffset = JobsWidth(10);
-            data.rightViewByTextFieldOffset = JobsWidth(4);
-            data.rightViewByOutLineOffset = JobsWidth(14);
-            data.returnKeyType = UIReturnKeyDefault;
-            data.keyboardAppearance = UIKeyboardAppearanceDefault;
-            data.keyboardType = UIKeyboardTypeDefault;
-            data.leftViewMode = UITextFieldViewModeNever;
-            data.rightViewMode = UITextFieldViewModeNever;
-            data.textFieldPlaceholder = JobsInternationalization(@"Search Games");
-            data.placeholderColor = JobsCor(@"#788190");
-            data.placeholderFont = UIFontWeightRegularSize(12);
-            data.attributedPlaceholder = nil;
             data.layoutSubviewsRectCorner = UIRectCornerAllCorners;
             data.layoutSubviewsRectCornerSize = CGSizeMake(JobsWidth(8), JobsWidth(8));
-            // 真实的textField，输入回调（每次输入的字符），如果要当前textField的字符，请取值textField.text
-            [data actionObjBlock:^(id  _Nullable data) {
-                JobsLog(@"ddf = %@",data);
-            }];
-            self.addSubview(data);
-            [data mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(self.announcementView);
-                make.top.equalTo(self.announcementView.mas_bottom).offset(JobsWidth(5));
-                make.height.mas_equalTo(JobsWidth(22));
-            }];data.jobsRichViewByModel(nil);
-        });
-    }return _textField;
+            data.realTextField.byReturnKeyType(UIReturnKeyDefault)
+                .byKeyboardAppearance(UIKeyboardAppearanceDefault)
+                .byKeyboardType(UIKeyboardTypePhonePad)
+                .byLeftViewMode(UITextFieldViewModeNever)
+                .byRightViewMode(UITextFieldViewModeNever)
+                .byPlaceholder(JobsInternationalization(@"Pick a Date"))
+                .byPlaceholderColor(JobsCor(@"#BBBBBB"))
+                .byPlaceholderFont(pingFangTCRegular(15))
+                .byAttributedPlaceholder(nil);
+            data.byLeftViewByOutLineOffset(JobsWidth(4))
+                .byLeftViewByTextFieldOffset(JobsWidth(4))
+                .byRightViewByTextFieldOffset(JobsWidth(4))
+                .byRightViewByOutLineOffset(JobsWidth(14))
+                .byRealTextFieldBgCor(JobsCor(@"F5F5F5"))
+                .byTitleCor(JobsCor(@"#788190"))
+                .byTextFieldSecureTextEntry(YES)
+                .byLeftView(BaseButton.jobsInit()
+                            .jobsResetBtnBgImage(JobsIMG(@"📅"))
+                            .onClickBy(^(UIButton *x){
+                                JobsLog(@"");
+                            }).onLongPressGestureBy(^(id data){
+                                JobsLog(@"");
+                            }).bySize(CGSizeMake(JobsWidth(16), JobsWidth(16))))
+                .byRightView(BaseButton.jobsInit()
+                             .jobsResetBtnBgImage(JobsIMG(@"向下的箭头"))
+                             .onClickBy(^(UIButton *x){
+                                 @jobs_strongify(self)
+                                 self.popupParameter = nil;
+                                 ShowView(self.calenderView);
+                             }).onLongPressGestureBy(^(id data){
+                                 JobsLog(@"");
+                             }).bySize(CGSizeMake(JobsWidth(16), JobsWidth(16))))
+                .byBgCor(JobsCor(@"#f7f7f7"))
+                .JobsRichViewByModel2(nil)
+                // 真实的textField，输入回调（每次输入的字符），如果要当前textField的字符，请取值textField.text
+                .JobsBlock1(^(id _Nullable data) {
+                    JobsLog(@"ddf = %@",data);
+                });
+        })).setLayerBy(jobsMakeLocationModel(^(__kindof JobsLocationModel * _Nullable data) {
+            data.layerCor = JobsCor(@"#BBBBBB");
+            data.jobsWidth = 1;
+            data.cornerRadiusValue = JobsWidth(8);
+        })).setMasonryBy(^(MASConstraintMaker *make){
+            make.size.mas_equalTo(CGSizeMake(JobsWidth(346), JobsWidth(40)));
+            make.top.equalTo(self.birthDayTitleLab.mas_bottom).offset(JobsWidth(10));
+            make.left.equalTo(self.scrollView).offset(JobsWidth(19));
+        }).on();
+    }return _textField_birthDay;
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>D1F6C376-24B8-40C0-B35B-212830CEE1A4</string>
@@ -58,9 +72,9 @@
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string></string>
+	<string>创建JobsTextField相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.JobsTextField</string>
+	<string>输入框@JobsTextField</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
