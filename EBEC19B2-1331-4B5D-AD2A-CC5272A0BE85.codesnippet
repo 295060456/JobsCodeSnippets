@@ -88,14 +88,15 @@ static dispatch_once_t static_tipsView01OnceToken;
     };
 }
 #pragma mark —— lazyLoad
-
 -(FMLoginByPhoneView *)phoneView{
     if(!_phoneView){
+        @jobs_weakify(self)
         _phoneView = self.view.addSubview(FMLoginByPhoneView
                                           .JobsRichViewByModel(nil)
                                           .JobsBlock1(^(id _Nullable data) {
                                          
                                      })).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
+                                         @jobs_strongify(self)
                                          make.top.equalTo(self.titleLab.mas_bottom).offset(JobsWidth(5));
                                          make.left.equalTo(self.view).offset(JobsWidth(10));
                                          make.size.mas_equalTo(FMLoginByPhoneView.viewSizeByModel(nil));
@@ -132,6 +133,7 @@ static dispatch_once_t static_tipsView01OnceToken;
                                          data.jobsWidth = 1;
                                          data.cornerRadiusValue = JobsWidth(32 / 2);
                                      }))).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
+                                         @jobs_strongify(self)
                                          make.centerY.equalTo(self.titleLab);
                                          make.right.equalTo(self).offset(JobsWidth(-15));
                                          make.size.mas_equalTo(CGSizeMake(JobsWidth(86), JobsWidth(32)));
