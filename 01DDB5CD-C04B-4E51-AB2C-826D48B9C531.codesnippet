@@ -9,7 +9,24 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>/// 调取系统相机（没有兼容横屏）
+	<string>/// 下部出现的弹出框，选择调取：系统相册？系统相机
+-(JobsUserHeaderDataView *)userHeaderDataView{
+    if(!_userHeaderDataView){
+        @jobs_weakify(self)
+        _userHeaderDataView = [JobsUserHeaderDataView.new makeImageByBlock:^(UIImage *_Nullable image) {
+            @jobs_strongify(self)
+            self.currentBtn.jobsResetBtnBgImage(image);/// 永远值显示最后选择的图
+        } finishBlock:^{
+            @jobs_strongify(self)
+            [self-&gt;_userHeaderDataView tf_hide:^{
+                @jobs_strongify(self)
+                self.popupParameter = nil;
+            }];
+        }];
+    }return _userHeaderDataView;
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/// 调取系统相机（没有兼容横屏）
 [self invokeSysCameraSuccessBlock:^(HXPhotoPickerModel *data) {
     @jobs_strongify(self)
 } failBlock:^(HXPhotoPickerModel *data) {
