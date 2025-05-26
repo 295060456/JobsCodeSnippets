@@ -184,6 +184,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                                    dy:JobsWidth(0)];
 }
 #pragma mark —— lazyLoad
+# 写法1
 /// BaseViewProtocol
 @synthesize tableView = _tableView;
 -(UITableView *)tableView{
@@ -194,7 +195,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             @jobs_strongify(self)
             tableView.bySeparatorStyle(UITableViewCellSeparatorStyleSingleLine)
                 .bySeparatorColor(HEXCOLOR(0xEEE2C8))
-                .byShowsVerticalScrollIndicator(NO)
                 .registerHeaderFooterViewClass(MSCommentTableHeaderFooterView.class,nil)
                 .byContentInset(UIEdgeInsetsMake(0, 0, JobsBottomSafeAreaHeight(), 0))
                 .byTableHeaderView(jobsMakeView(^(__kindof UIView * _Nullable view) {
@@ -203,13 +203,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                 .byTableFooterView(jobsMakeView(^(__kindof UIView * _Nullable view) {
                     /// 这里接入的就是一个UIView的派生类。只需要赋值Frame，不需要addSubview
                 }))
-                .dataLink(self)
                 .emptyDataByButtonModel(jobsMakeButtonModel(^(__kindof UIButtonModel * _Nullable data) {
                     data.title = JobsInternationalization(@"NO MESSAGES FOUND");
                     data.titleCor = JobsWhiteColor;
                     data.titleFont = bayonRegular(JobsWidth(30));
                     data.normalImage = JobsIMG(@"小狮子");
                 }))
+                .showsVerticalScrollIndicatorBy(NO)
+                .showsHorizontalScrollIndicatorBy(NO)
                 .byScrollEnabled(YES)
                 .byBgCor(JobsClearColor);
 
@@ -262,7 +263,23 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         })).setMasonryBy(^(MASConstraintMaker *_Nonnull make){
             @jobs_strongify(self)
             /// TODO
-        }).on();
+        }).on().dataLink(self);/// dataLink(self)不能写在Block里面，会出问题
+    }return _tableView;
+}
+# 写法2
+/// BaseViewProtocol
+@synthesize tableView = _tableView;
+-(UITableView *)tableView{
+    if (!_tableView) {
+        @jobs_weakify(self)
+        _tableView = jobsMakeTableViewByPlain(^(__kindof UITableView * _Nullable tableView) {
+            @jobs_strongify(self)
+            tableView.dataLink(self);
+            /// TODO
+            [self.view.addSubview(tableView) mas_makeConstraints:^(MASConstraintMaker *make) {
+                /// TODO
+            }];
+        });
     }return _tableView;
 }
 
