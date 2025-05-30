@@ -209,6 +209,24 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                     data.titleFont = bayonRegular(JobsWidth(30));
                     data.normalImage = JobsIMG(@"小狮子");
                 }))
+                /// 普通的MJRefreshHeader（触发事件）（二选一）
+                .byMJRefreshHeader([MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                    @jobs_strongify(self)
+                    /// TODO
+                    NSObject.feedbackGenerator(nil);/// 震动反馈
+                    self-&gt;_collectionView.endRefreshing(YES);
+                }].byMJRefreshHeaderConfigModel(self.mjHeaderDefaultConfig))
+                /// MJRefreshHeader的拓展：下拉刷新Lottie动画（二选一）
+                .byMJRefreshHeader(self.lotAnimMJRefreshHeader.byRefreshConfigModel(jobsMakeRefreshConfigModel(^(__kindof MJRefreshConfigModel * _Nullable model) {
+                    
+                })))
+                /// 普通的MJRefreshFooter（触发事件）
+                .byMJRefreshFooter([MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    @jobs_strongify(self)
+                    /// TODO
+                    NSObject.feedbackGenerator(nil);/// 震动反馈
+                    self-&gt;_collectionView.endRefreshing(YES);
+                }].byMJRefreshFooterConfigModel(self.mjFooterDefaultConfig))
                 .showsVerticalScrollIndicatorBy(NO)
                 .showsHorizontalScrollIndicatorBy(NO)
                 .byScrollEnabled(YES)

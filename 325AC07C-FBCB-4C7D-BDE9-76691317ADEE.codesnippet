@@ -208,25 +208,25 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
                                           .registerCollectionElementKindSectionHeaderClass(BaseCollectionReusableView.class,@"")
                                           .registerCollectionElementKindSectionFooterClass(BaseCollectionReusableView.class,@"")
                                           .byEdgeInsets(UIEdgeInsetsMake(0, 0, 0, 0))
-                                          .byBounces(NO)///设置为NO，使得collectionView只能上拉，不能下拉
-                                          .dataLink(self)
-                                          /// 普通的MJRefreshHeader（二选一）
-                                          .byMJRefreshHeader(_collectionView.MJRefreshNormalHeaderBy([self refreshHeaderDataBy:^id _Nullable(id  _Nullable data) {
+                                          /// 普通的MJRefreshHeader（触发事件）（二选一）
+                                          .byMJRefreshHeader([MJRefreshNormalHeader headerWithRefreshingBlock:^{
                                               @jobs_strongify(self)
-                                              self.feedbackGenerator(nil);//震动反馈
+                                              /// TODO
+                                              NSObject.feedbackGenerator(nil);/// 震动反馈
                                               self-&gt;_collectionView.endRefreshing(YES);
-                                              return nil;
-                                          }]))
+                                          }].byMJRefreshHeaderConfigModel(self.mjHeaderDefaultConfig))
                                           /// MJRefreshHeader的拓展：下拉刷新Lottie动画（二选一）
                                           .byMJRefreshHeader(self.lotAnimMJRefreshHeader.byRefreshConfigModel(jobsMakeRefreshConfigModel(^(__kindof MJRefreshConfigModel * _Nullable model) {
                                               
                                           })))
-                                          .byMJRefreshFooter(_collectionView.MJRefreshAutoNormalFooterBy([self refreshHeaderDataBy:^id _Nullable(id  _Nullable data) {
+                                          /// 普通的MJRefreshFooter（触发事件）
+                                          .byMJRefreshFooter([MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                                               @jobs_strongify(self)
-                                              self.feedbackGenerator(nil);//震动反馈
+                                              /// TODO
+                                              NSObject.feedbackGenerator(nil);/// 震动反馈
                                               self-&gt;_collectionView.endRefreshing(YES);
-                                              return nil;
-                                          }]))
+                                          }].byMJRefreshFooterConfigModel(self.mjFooterDefaultConfig))
+                                          .byBounces(NO)///设置为NO，使得collectionView只能上拉，不能下拉
                                           .showsVerticalScrollIndicatorBy(NO)
                                           .showsHorizontalScrollIndicatorBy(NO)
                                           /// 无数据占位：用默认的图文占位表达（二选一）
@@ -249,7 +249,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
             make.centerX.equalTo(self);
             make.top.equalTo(self.jobsTextField.mas_bottom).offset(JobsWidth(5));
             make.size.mas_equalTo(CGSizeMake(JobsMainScreen_WIDTH() - JobsWidth(30), JobsWidth(72)));
-        }).on().byBgCor(JobsClearColor);
+        }).on().byBgCor(JobsClearColor).dataLink(self);
         
         _collectionView.setContentOffsetByYES(CGPointMake(0, 0));// 这句最快在 viewWillLayoutSubviews 有效
         
