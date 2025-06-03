@@ -284,14 +284,13 @@ Prop_copy()NSMutableArray &lt;__kindof NSString *&gt;*titles;
 /// 此属性决定依附于此的viewController
 -(JXCategoryListContainerView *)listContainerView{
     if (!_listContainerView) {
-        _listContainerView = jobsMakeCategoryListContainerViewByCollectionViewStyle(self);
-        _listContainerView.defaultSelectedIndex = 1;// 默认从第二个开始显示
-        self.view.addSubview(_listContainerView);
-        [_listContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        _listContainerView = jobsMakeCategoryListContainerViewByCollectionViewStyle(self)
+            .byDefaultSelectedIndex(1);/// 默认从第二个开始显示
+        [self.view.addSubview(_listContainerView) mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.edges.equalTo(self.view);
-            make.top.equalTo(self.gk_navigationBar.mas_bottom).offset(listContainerViewDefaultOffset);
+            make.top.equalTo(self.balanceView.mas_bottom).offset(listContainerViewDefaultOffset);
             make.left.right.bottom.equalTo(self.view);
-        }];[self.view layoutIfNeeded];
+        }];self.view.refresh();
         /// ❤️在需要的地方写❤️
         NSNumber *currentIndex = self.listContainerView.valueForKey(@"currentIndex");
         NSLog(@"滑动或者点击以后，改变控制器，得到的目前最新的index = %d",currentIndex.intValue);
