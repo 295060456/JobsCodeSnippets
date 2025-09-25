@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.JXCategoryView.style</string>
+	<string>Jobs@JXCategoryView.style</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -229,7 +229,7 @@ mainTableViewDidScroll:(UIScrollView *)scrollView{
 	<key>IDECodeSnippetSummary</key>
 	<string>下拉headerView变大</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>JXCategoryView@下拉headerView变大</string>
+	<string>OC@JXCategoryView.下拉headerView变大</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

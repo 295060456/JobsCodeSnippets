@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>Init.viewPop</string>
+	<string>Jobs@ViewPop</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -40,7 +40,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string> 弹出框</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>PopView</string>
+	<string>OC@PopView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

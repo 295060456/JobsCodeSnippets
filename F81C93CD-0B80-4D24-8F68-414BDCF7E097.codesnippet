@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.ZYTextField</string>
+	<string>Jobs@ZYTextField</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -66,7 +66,7 @@ Prop_assign()CGRect editingRectForBounds;/// 重置编辑区域【编辑状态�
 	<key>IDECodeSnippetSummary</key>
 	<string>创建ZYTextField相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>输入框@ZYTextField</string>
+	<string>OC@输入框.ZYTextField</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

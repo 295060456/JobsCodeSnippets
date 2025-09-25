@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>runtime</string>
+	<string>Jobs@Runtime</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -25,7 +25,7 @@ if (super_func) super_func(self, sel_registerName("layoutSubviews"));
 	<key>IDECodeSnippetSummary</key>
 	<string>修改m文件的属性</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Runtime</string>
+	<string>OC@Runtime</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

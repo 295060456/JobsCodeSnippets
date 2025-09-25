@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>UITextFieldDelegate</string>
+	<string>Jobs@UITextFieldDelegate</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -89,7 +89,7 @@ willDismissEditMenuWithAnimator:(id&lt;UIEditMenuInteractionAnimating&gt;)animat
 	<key>IDECodeSnippetSummary</key>
 	<string>UITextFieldDelegate</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITextFieldDelegate</string>
+	<string>OC@UITextFieldDelegate</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

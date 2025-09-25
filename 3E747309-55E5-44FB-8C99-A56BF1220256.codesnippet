@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.JobsBtn</string>
+	<string>Jobs@Btn</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -183,7 +183,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>普通按钮/普通文本按钮/富文本按钮/SDWebImage按钮</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>按钮❤️</string>
+	<string>OC@按钮❤️</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

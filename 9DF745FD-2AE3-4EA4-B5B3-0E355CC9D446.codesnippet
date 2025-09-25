@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>JobsCategoryProperties</string>
+	<string>Jobs@CategoryProperties</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -82,7 +82,7 @@ JobsKey(_voidBlock)
 	<key>IDECodeSnippetSummary</key>
 	<string>Demo</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>分类加【数据】属性</string>
+	<string>OC@分类加【数据】属性</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

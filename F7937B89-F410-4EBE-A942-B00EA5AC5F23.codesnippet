@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.network</string>
+	<string>Jobs@YTKNetwork</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -122,9 +122,9 @@
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>猿题库</string>
+	<string>猿题库网络请求（示例）</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>网络请求（示例）</string>
+	<string>OC@猿题库网络请求（示例）</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>CP</string>
+	<string>Jobs@CP</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -48,9 +48,9 @@ self.invokeSysCamera();
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>调取系统相册&amp;系统相机</string>
+	<string>OC调取系统相册&amp;系统相机</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>调取系统相册&amp;系统相机</string>
+	<string>OC@调取系统相册&amp;系统相机</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.JXCategoryView.normal</string>
+	<string>Jobs@JXCategoryView.Normal</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -386,7 +386,7 @@ scrollingFromLeftIndex:(NSInteger)leftIndex
 	<key>IDECodeSnippetSummary</key>
 	<string>JXCategoryView框架的使用</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>🇺🇸创建JXCategoryView</string>
+	<string>OC@创建JXCategoryView🇺🇸</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

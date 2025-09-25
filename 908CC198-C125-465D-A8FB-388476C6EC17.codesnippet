@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>JobsAPI</string>
+	<string>Jobs@API</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -24,7 +24,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>网络Api接口的实现</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>JobsAPI</string>
+	<string>OC@JobsAPI</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

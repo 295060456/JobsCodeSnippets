@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.UITableViewCell</string>
+	<string>Jobs@UITableViewCell</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -134,7 +134,7 @@ UIViewModelProtocol_synthesize
 	<key>IDECodeSnippetSummary</key>
 	<string>基于BaseCellProtocol的TBVCell创建</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITableViewCell</string>
+	<string>OC@UITableViewCell</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

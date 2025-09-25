@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.viewForHeaderAndFooterInSection</string>
+	<string>Jobs@ViewForHeaderAndFooterInSection</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_END
 	<key>IDECodeSnippetSummary</key>
 	<string>【DOC】tableHeaderView_tableFooterView的使用</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>init.viewForHeaderAndFooterInSection</string>
+	<string>OC@viewForHeaderAndFooterInSection</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

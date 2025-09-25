@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.UITableView</string>
+	<string>Jobs@UITableView</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -325,7 +325,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UITableView的相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITableView</string>
+	<string>OC@UITableView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

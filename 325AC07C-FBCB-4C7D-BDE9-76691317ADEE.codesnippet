@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.UICollectionView</string>
+	<string>Jobs@UICollectionView</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -330,7 +330,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UICollectionView的子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UICollectionView</string>
+	<string>OC@UICollectionView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

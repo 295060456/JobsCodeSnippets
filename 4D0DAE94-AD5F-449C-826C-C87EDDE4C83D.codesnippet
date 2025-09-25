@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.UITextView</string>
+	<string>Jobs@UITextView</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -68,7 +68,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UITextView相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITextView</string>
+	<string>OC@UITextView</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.viewForHeaderInSection</string>
+	<string>Jobs@ViewForHeaderInSection</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -101,7 +101,7 @@ BaiShaETProjMembersBoardView.m
 	<key>IDECodeSnippetSummary</key>
 	<string>viewForHeaderInSection的使用记录</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>ViewForHeaderInSection</string>
+	<string>OC@ViewForHeaderInSection</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

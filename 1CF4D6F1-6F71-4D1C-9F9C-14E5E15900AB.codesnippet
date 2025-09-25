@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.JobsTextField</string>
+	<string>Jobs@UITextField</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -41,7 +41,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UITextField相关子类</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>输入框@UITextField</string>
+	<string>OC@输入框.UITextField</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

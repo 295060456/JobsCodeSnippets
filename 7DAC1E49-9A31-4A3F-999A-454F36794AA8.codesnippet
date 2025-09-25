@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>init.UIViewController.CycleLife</string>
+	<string>Jobs@UIViewController.CycleLife</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -92,7 +92,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>创建UIViewController的各个相关生命周期</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UIViewController</string>
+	<string>OC@UIViewController</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

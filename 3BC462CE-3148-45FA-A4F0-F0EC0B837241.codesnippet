@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string></string>
+	<string>Jobs@PDF</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
@@ -34,7 +34,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string>PDF的处理</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>PDF</string>
+	<string>OC@PDF</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

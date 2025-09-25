@@ -3,28 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>Jobs@available</string>
+	<string>Jobs@SwiftEnum</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>if (@available(iOS 13.1, *)) {
-    
-} else {
-   
+	<string>public enum TransformLayerDirectionType: UInt {
+    case up = 0,/// 文字方向朝上(默认正常)
+         left,  /// 文字方向朝左
+         down,  /// 文字方向朝下
+         right  /// 文字方向朝右
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>258D33DE-0B13-4F14-8762-A5CED1FFFF42</string>
+	<string>16C90991-8354-41F4-809C-3226E1306C55</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>@available</string>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>OC@available</string>
+	<string>Swift@枚举</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>2</integer>
+	<integer>0</integer>
 </dict>
 </plist>
