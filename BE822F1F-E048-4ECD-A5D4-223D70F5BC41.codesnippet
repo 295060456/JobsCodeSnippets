@@ -15,7 +15,10 @@
     .bySeparatorStyle(.none)
     .byShowsVerticalScrollIndicator(false)
     .byShowsHorizontalScrollIndicator(false)
-    .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")</string>
+    .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")
+    .byNoContentInsetAdjustment()
+    .byNoSectionHeaderTopPadding()
+addSubview(mainTableView)</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>BE822F1F-E048-4ECD-A5D4-223D70F5BC41</string>
 	<key>IDECodeSnippetLanguage</key>
