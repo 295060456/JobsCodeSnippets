@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@UITableView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>mainTableView = GKPageTableView(frame: .zero, style: .plain)
+    .byDataSource(self)
+    .byDelegate(self)
+    .bySeparatorStyle(.none)
+    .byShowsVerticalScrollIndicator(false)
+    .byShowsHorizontalScrollIndicator(false)
+    .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BE822F1F-E048-4ECD-A5D4-223D70F5BC41</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>创建UITableView的相关子类</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@UITableView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
