@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@UIToolbar</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>private lazy var passwordAccessory: UIToolbar = {
+    let bar = UIToolbar()
+    bar.items = [
+        UIBarButtonItem()
+            .byTitle("清空")
+            .byTitleFont(.systemFont(ofSize: 15))
+            .byTitleColor(.systemRed)
+            .byStyle(.plain)
+            .onTap { [weak self] _ in
+                guard let self = self else { return }   // ✅ 确保生命周期安全
+                self.passwordTF.text = ""
+                // 也可以：self.passwordTF.rx.text.onNext("")
+            },
+        UIBarButtonItem(systemItem: .flexibleSpace),
+        UIBarButtonItem()
+            .byTitle("完成")
+            .byTitleFont(.systemFont(ofSize: 15))
+            .byTitleColor(.systemYellow)
+            .byStyle(.done)
+            .onTap { [weak self] _ in
+                guard let self = self else { return }   // ✅ 确保生命周期安全
+                view.endEditing(true)
+            },
+    ]
+    bar.sizeToFit()
+    return bar
+    }()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>41E0A442-1C4A-4547-9600-6B184C8EEF9A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@UIToolbar</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
