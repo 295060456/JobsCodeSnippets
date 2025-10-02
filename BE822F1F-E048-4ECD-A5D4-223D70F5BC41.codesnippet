@@ -9,16 +9,22 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>mainTableView = GKPageTableView(frame: .zero, style: .plain)
-    .byDataSource(self)
-    .byDelegate(self)
-    .bySeparatorStyle(.none)
-    .byShowsVerticalScrollIndicator(false)
-    .byShowsHorizontalScrollIndicator(false)
-    .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")
-    .byNoContentInsetAdjustment()
-    .byNoSectionHeaderTopPadding()
-addSubview(mainTableView)</string>
+	<string>private lazy var mainTableView: UITableView = {
+    UITableView(frame: .zero, style: .plain)
+        .byDataSource(self)
+        .byDelegate(self)
+        .bySeparatorStyle(.none)
+        .byShowsVerticalScrollIndicator(false)
+        .byShowsHorizontalScrollIndicator(false)
+        .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")
+        .byNoContentInsetAdjustment()
+        .byNoSectionHeaderTopPadding()
+        .byAddTo(view) { [unowned self] make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(40)
+            make.left.right.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+}()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>BE822F1F-E048-4ECD-A5D4-223D70F5BC41</string>
 	<key>IDECodeSnippetLanguage</key>

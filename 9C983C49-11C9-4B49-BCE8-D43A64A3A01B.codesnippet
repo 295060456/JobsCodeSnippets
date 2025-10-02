@@ -3,34 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>Jobs@UIBarButtonItem</string>
+	<string>Jobs@guard</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>private lazy var barButtonItem: UIBarButtonItem = {
-    UIBarButtonItem()
-        .byTitle("完成")
-        .byTitleFont(.systemFont(ofSize: 15))
-        .byTitleColor(.systemYellow)
-        .byStyle(.done)
-        .onTap { [weak self] _ in
-            guard let self = self else { return }   // ✅ 确保生命周期安全
-            view.endEditing(true)
-    }
-}()</string>
+	<string>guard let self else { return }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>9F03AEC4-9CD9-4FD3-9DCA-13F258670D78</string>
+	<string>9C983C49-11C9-4B49-BCE8-D43A64A3A01B</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Swift@UIBarButtonItem</string>
+	<string>Swift@guard</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>2</integer>
+	<integer>0</integer>
 </dict>
 </plist>

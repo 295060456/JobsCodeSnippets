@@ -9,32 +9,39 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>let eye = UIButton(type: .system)
-    // 普通文字：未选中状态标题
-    .byTitle("显示", for: .normal)
-    // 选中状态标题
-    .byTitle("隐藏", for: .selected)
-    // 文字颜色：区分状态
-    .byTitleColor(.systemBlue, for: .normal)
-    .byTitleColor(.systemRed, for: .selected)
-    // 字体统一
-    .byTitleFont(.systemFont(ofSize: 16, weight: .medium))
-    // 图标（SF Symbol）
-    .byImage(UIImage(systemName: "eye.slash"), for: .normal)   // 未选中图标
-    .byImage(UIImage(systemName: "eye"), for: .selected)       // 选中图标
-    // 图文内边距
-    .byContentEdgeInsets(UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
-    // 图标与文字间距
-    .byTitleEdgeInsets(UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6))
-    // 点按事件（统一入口）
-    .onTap { [weak self] sender in
-        guard let self else { return }
-        sender.isSelected.toggle()
-        // 文字与图标自动切换
-        self.passwordTF.isSecureTextEntry.toggle()
-        self.passwordTF.togglePasswordVisibility()
-        print("👁 当前状态：\(sender.isSelected ? "隐藏密码" : "显示密码")")
-    }</string>
+	<string>private lazy var exampleButton: UIButton = {
+    UIButton(type: .system)
+        // 普通文字：未选中状态标题
+        .byTitle("显示", for: .normal)
+        // 选中状态标题
+        .byTitle("隐藏", for: .selected)
+        // 文字颜色：区分状态
+        .byTitleColor(.systemBlue, for: .normal)
+        .byTitleColor(.systemRed, for: .selected)
+        // 字体统一
+        .byTitleFont(.systemFont(ofSize: 16, weight: .medium))
+        // 图标（SF Symbol）
+        .byImage(UIImage(systemName: "eye.slash"), for: .normal)   // 未选中图标
+        .byImage(UIImage(systemName: "eye"), for: .selected)       // 选中图标
+        // 图文内边距
+        .byContentEdgeInsets(UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
+        // 图标与文字间距
+        .byTitleEdgeInsets(UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6))
+        // 点按事件（统一入口）
+        .onTap { [weak self] sender in
+            guard let self else { return }
+            sender.isSelected.toggle()
+            // 文字与图标自动切换
+            self.passwordTF.isSecureTextEntry.toggle()
+            self.passwordTF.togglePasswordVisibility()
+            print("👁 当前状态：\(sender.isSelected ? "隐藏密码" : "显示密码")")
+        }
+        .byAddTo(view) { [unowned self] make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(40)
+            make.left.right.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+}()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>48398B56-1484-4104-B035-CEC720396169</string>
 	<key>IDECodeSnippetLanguage</key>

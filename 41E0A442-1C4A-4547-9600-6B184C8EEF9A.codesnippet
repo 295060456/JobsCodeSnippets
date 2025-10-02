@@ -10,8 +10,7 @@
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>private lazy var passwordAccessory: UIToolbar = {
-    let bar = UIToolbar()
-    bar.items = [
+    UIToolbar().byItems([
         UIBarButtonItem()
             .byTitle("清空")
             .byTitleFont(.systemFont(ofSize: 15))
@@ -19,8 +18,7 @@
             .byStyle(.plain)
             .onTap { [weak self] _ in
                 guard let self = self else { return }   // ✅ 确保生命周期安全
-                self.passwordTF.text = ""
-                // 也可以：self.passwordTF.rx.text.onNext("")
+                /// TODO
             },
         UIBarButtonItem(systemItem: .flexibleSpace),
         UIBarButtonItem()
@@ -32,10 +30,14 @@
                 guard let self = self else { return }   // ✅ 确保生命周期安全
                 view.endEditing(true)
             },
-    ]
-    bar.sizeToFit()
-    return bar
-    }()</string>
+    ])
+    .bySizeToFit()
+    .byAddTo(view) { [unowned self] make in
+        make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(40)
+        make.left.right.equalToSuperview().inset(24)
+        make.height.equalTo(44)
+    }
+}()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>41E0A442-1C4A-4547-9600-6B184C8EEF9A</string>
 	<key>IDECodeSnippetLanguage</key>

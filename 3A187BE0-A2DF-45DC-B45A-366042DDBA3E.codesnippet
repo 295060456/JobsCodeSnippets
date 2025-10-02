@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@GKNavBar</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>import GKNavigationBarSwift
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    jobsSetupGKNav(
+                title: "Demo 列表",
+                leftSymbol: "list.bullet",
+                rightButtons: [
+                        ("moon.circle.fill", .systemIndigo, { [weak self] in self?.toggleTheme() }),
+                        ("globe", .systemGreen, { [weak self] in self?.toggleLanguage() }),
+                        ("stop.circle.fill", .systemRed, { [weak self] in self?.stopRefreshing() })
+                ]
+        )
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3A187BE0-A2DF-45DC-B45A-366042DDBA3E</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Ruby</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@GKNavigationBarSwift的二次封装和使用</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
