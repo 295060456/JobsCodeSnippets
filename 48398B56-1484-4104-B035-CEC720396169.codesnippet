@@ -11,23 +11,34 @@
 	<key>IDECodeSnippetContents</key>
 	<string>private lazy var exampleButton: UIButton = {
     UIButton(type: .system)
-        // 普通文字：未选中状态标题
+        /// 普通字符串@设置主标题
         .byTitle("显示", for: .normal)
-        // 选中状态标题
         .byTitle("隐藏", for: .selected)
-        // 文字颜色：区分状态
         .byTitleColor(.systemBlue, for: .normal)
         .byTitleColor(.systemRed, for: .selected)
-        // 字体统一
         .byTitleFont(.systemFont(ofSize: 16, weight: .medium))
-        // 图标（SF Symbol）
-        .byImage(UIImage(systemName: "eye.slash"), for: .normal)   // 未选中图标
-        .byImage(UIImage(systemName: "eye"), for: .selected)       // 选中图标
-        // 图文内边距
-        .byContentEdgeInsets(UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
-        // 图标与文字间距
-        .byTitleEdgeInsets(UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6))
-        // 点按事件（统一入口）
+        /// 普通字符串@设置副标题
+        .bySubTitle("显示", for: .normal)
+        .bySubTitle("隐藏", for: .selected)
+        .bySubTitleColor(.systemBlue, for: .normal)
+        .bySubTitleColor(.systemRed, for: .selected)
+        .bySubTitleFont(.systemFont(ofSize: 16, weight: .medium))
+        /// 富文本字@设置主标题
+        .byRichTitle(JobsRichText.make([
+            JobsRichRun(.text("¥99")).font(.systemFont(ofSize: 18, weight: .semibold)).color(.systemRed),
+            JobsRichRun(.text(" /月")).font(.systemFont(ofSize: 16)).color(.white)
+        ]))
+         /// 富文本字@设置副标题
+        .byRichSubTitle(JobsRichText.make([
+            JobsRichRun(.text("原价 ")).font(.systemFont(ofSize: 12)).color(.white.withAlphaComponent(0.8)),
+            JobsRichRun(.text("¥199")).font(.systemFont(ofSize: 12, weight: .medium)).color(.systemYellow)
+        ]))
+        /// 按钮图片@图文关系
+        .byImage(UIImage(systemName: "eye.slash"), for: .normal)                // 未选中图标
+        .byImage(UIImage(systemName: "eye"), for: .selected)                    // 选中图标
+        .byContentEdgeInsets(UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))// 图文内边距
+        .byTitleEdgeInsets(UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6)) // 图标与文字间距
+        /// 事件触发@点按
         .onTap { [weak self] sender in
             guard let self else { return }
             sender.isSelected.toggle()
@@ -36,10 +47,48 @@
             self.passwordTF.togglePasswordVisibility()
             print("👁 当前状态：\(sender.isSelected ? "隐藏密码" : "显示密码")")
         }
+        /// 事件触发@长按
+        .onLongPress(minimumPressDuration: 0.8) { btn, gr in
+             if gr.state == .began {
+                 btn.alpha = 0.6
+                 print("长按开始 on \(btn)")
+             } else if gr.state == .ended || gr.state == .cancelled {
+                 btn.alpha = 1.0
+                 print("长按结束")
+             }
+         }
         .byAddTo(view) { [unowned self] make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(40)
             make.left.right.equalToSuperview().inset(24)
             make.height.equalTo(44)
+        }
+}()
+
+private lazy var countdownButton: UIButton = {
+    UIButton(type: .system)
+        .byTitle("获取验证码", for: .normal)
+        .byTitleColor(.white, for: .normal)
+        .byBackgroundColor(.systemGreen, for: .normal)
+        .onCountdownTick { btn, remain, total, kind in
+             log("⏱️ [\(kind.jobs_displayName)] \(remain)/\(total)")
+         }
+         .onCountdownFinish { btn, kind in
+             log("✅ [\(kind.jobs_displayName)] 倒计时完成")
+         }
+        .onTap { [weak self] btn in
+            guard let self else { return }
+            let total = self.parseCountdownTotal()   // 来自 countdownField
+            let step  = self.intervalSec             // 来自 intervalField（你已有逻辑维护）
+            let kind  = self.currentKind             // 来自 segmented
+            btn.startJobsCountdown(total: total,
+                                   interval: step,
+                                   kind: kind)
+        }
+        .byAddTo(view) { [unowned self] make in
+            make.top.equalTo(self.hintLabel.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(horizontalInset)
+            make.right.equalToSuperview().inset(horizontalInset)
+            make.height.equalTo(50)
         }
 }()</string>
 	<key>IDECodeSnippetIdentifier</key>
