@@ -9,20 +9,59 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>private lazy var mainTableView: UITableView = {
-    UITableView(frame: .zero, style: .plain)
+	<string>private lazy var tableView: UITableView = {
+    UITableView(frame: .zero, style: .insetGrouped)
         .byDataSource(self)
         .byDelegate(self)
-        .bySeparatorStyle(.none)
-        .byShowsVerticalScrollIndicator(false)
-        .byShowsHorizontalScrollIndicator(false)
-        .registerCellByID(CellCls: UITableViewCell.self, ID: "cell")
+        .registerCell(UITableViewCell.self)
         .byNoContentInsetAdjustment()
+        .bySeparatorStyle(.singleLine)
         .byNoSectionHeaderTopPadding()
-        .byAddTo(view) { [unowned self] make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.left.right.equalToSuperview().inset(24)
-            make.height.equalTo(44)
+        .byContentInset(UIEdgeInsets(
+            top: UIApplication.jobsSafeTopInset + 30,
+            left: 0,
+            bottom: 0,
+            right: 0
+        ))
+        // 下拉刷新（自定义 JobsHeaderAnimator）
+        .pullDownWithJobsAnimator({ [weak self] in
+            guard let self = self, !self.isPullRefreshing else { return }
+            self.isPullRefreshing = true
+            print("⬇️ 下拉刷新触发")
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isPullRefreshing = false
+                self.tableView.byReloadData()
+                self.tableView.pullDownStop()               // 结束下拉
+                self.updateFooterAvailability()
+                print("✅ 下拉刷新完成")
+            }
+        }, config: { animator in
+            animator.idleDescription = "下拉刷新"
+            animator.releaseToRefreshDescription = "松开立即刷新"
+            animator.loadingDescription = "正在刷新中..."
+            animator.noMoreDataDescription = "已经是最新数据"
+        })
+        // 上拉加载（自定义 JobsFooterAnimator）
+        .pullUpWithJobsAnimator({ [weak self] in
+            guard let self = self, !self.isLoadingMore else { return }
+            self.isLoadingMore = true
+            print("⬆️ 上拉加载触发")
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isLoadingMore = false
+                self.tableView.pullUpStop()                 // 结束上拉
+                self.updateFooterAvailability()
+                print("✅ 上拉加载完成")
+            }
+        }, config: { animator in
+            animator.idleDescription = "上拉加载更多"
+            animator.releaseToRefreshDescription = "松开立即加载"
+            animator.loadingMoreDescription = "加载中..."
+            animator.noMoreDataDescription = "已经到底了～"
+        })
+        .byAddTo(view) { make in
+            make.edges.equalToSuperview()
         }
 }()</string>
 	<key>IDECodeSnippetIdentifier</key>
