@@ -62,6 +62,22 @@
             make.left.right.equalToSuperview().inset(24)
             make.height.equalTo(44)
         }
+        /// UIButtonConfiguration
+        if #available(iOS 15.0, *) {
+            b.byConfiguration { c in
+                c.byTitle("背景图：Base64 / URL")
+                    .byBaseForegroundCor(.white)
+                    .byContentInsets(.init(top: 16, leading: 16, bottom: 16, trailing: 16))
+                    .byCornerStyle(.large)
+                    .byImagePlacement(.trailing)
+                    .byImagePadding(8)
+            }
+        } else {
+            b.byTitle("背景图：Base64 / URL", for: .normal)
+                .byTitleColor(.white, for: .normal)
+                .byContentEdgeInsets(.init(top: 16, left: 16, bottom: 16, right: 16))
+                .byBgColor(.systemBlue)
+        }
 }()
 // MARK: - 倒计时演示按钮（同一套 API：传 total =&gt; 倒计时）
 private lazy var countdownButton: UIButton = {

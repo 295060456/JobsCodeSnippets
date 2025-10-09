@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@UIImageViewNetWork</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// MARK: - UIImageView
+/// UIImageView@字符串本地图
+private lazy var localImgView: UIImageView = {
+    UIImageView()
+        .byImage("Ani".img)
+        .byContentMode(.scaleAspectFill)
+        .byClipsToBounds()
+        .byAddTo(scrollView) { [unowned self] make in
+            make.top.equalTo(scrollView.contentLayoutGuide.snp.top).offset(10.h)
+            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
+            make.height.equalTo(180)
+        }
+}()
+/// UIImageView字符串网络图@Kingfisher
+private lazy var asyncImgView: UIImageView = {
+    let imageView = UIImageView()
+        .byContentMode(.scaleAspectFill)
+        .byClipsToBounds()
+        .byAddTo(scrollView) { [unowned self] make in
+            make.top.equalTo(localImgView.snp.bottom).offset(20)
+            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
+            make.height.equalTo(180)
+        }
+    Task {
+        do {
+            imageView.byImage(try await "https://picsum.photos/200/300".kfLoadImage())
+            print("✅ 加载成功 (KF async)")
+        } catch {
+            print("❌ 加载失败 (KF async)：\(error)")
+        }
+    }
+    return imageView
+}()
+/// UIImageView字符串网络图@SDWebImage
+private lazy var asyncImgViewSD: UIImageView = {
+    let imageView = UIImageView()
+        .byContentMode(.scaleAspectFill)
+        .byClipsToBounds()
+        .byAddTo(scrollView) { [unowned self] make in
+            make.top.equalTo(asyncImgView.snp.bottom).offset(20)
+            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
+            make.height.equalTo(180)
+        }
+    Task {
+        do {
+            imageView.byImage(try await "https://picsum.photos/400/300".sdLoadImage())
+            print("✅ 加载成功 (SD async)")
+        } catch {
+            print("❌ 加载失败 (SD async)：\(error)")
+        }
+    }
+    return imageView
+}()
+/// UIImageView网络图（失败兜底图）@Kingfisher
+private lazy var wrapperImgView: UIImageView = {
+    UIImageView()
+        .byContentMode(.scaleAspectFill)
+        .byClipsToBounds()
+        .kf_setImage(from: "https://picsum.photos/200", placeholder: "Ani".img)
+        .byAddTo(scrollView) { [unowned self] make in
+            make.top.equalTo(asyncImgViewSD.snp.bottom).offset(20)
+            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
+            make.height.equalTo(180)
+        }
+}()
+/// UIImageView网络图（失败兜底图）@SDWebImage
+private lazy var wrapperImgViewSD: UIImageView = {
+    UIImageView()
+        .byContentMode(.scaleAspectFill)
+        .byClipsToBounds()
+        .sd_setImage(from: "https://picsum.photos/200", placeholder: "Ani".img)
+        .byAddTo(scrollView) { [unowned self] make in
+            make.top.equalTo(wrapperImgView.snp.bottom).offset(20)
+            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
+            make.height.equalTo(180)
+        }
+    }()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7E33EADB-8A2C-43D1-9104-A95BAFFF0D82</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@UIImageView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
