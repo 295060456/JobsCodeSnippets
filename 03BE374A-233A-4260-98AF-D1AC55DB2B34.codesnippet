@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@VCBg</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>bgImageView().byImage("唐老鸭".img)
+
+Task { @MainActor in
+    bgImageView().byImage(await "https://picsum.photos/400/300".kfLoadImage(fallbackImage: "唐老鸭".img))
+}
+
+Task { @MainActor in
+    bgImageView().byImage(await "https://picsum.photos/400/300".sdLoadImage(fallbackImage: "唐老鸭".img))
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>03BE374A-233A-4260-98AF-D1AC55DB2B34</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>当前是控制器</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@控制器添加背景图</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

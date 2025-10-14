@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@TextView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>private lazy var tv: UITextView = { [unowned self] in
+    UITextView()
+        .byText("这里展示基础链式调用：字体、颜色、边框、内边距等。")
+        .byFont(.systemFont(ofSize: 16))
+        .byTextColor(.label)
+        .byTextAlignment(.left)
+        .byEditable(true)
+        .bySelectable(true)
+        .byTextContainerInset(UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10))
+        .byRoundedBorder(color: .systemGray4, width: 1, radius: 8)
+        .onChange { tv, input, old, isDeleting in
+            let new = tv.text ?? ""
+            print("✏️ input='\(input)' old='\(old)' new='\(new)' deleting=\(isDeleting)")
+
+            // 6~20 有效：绿边，否则红边
+            let ok = (6...20).contains(new.count)
+            tv.layer.borderWidth = 1
+            tv.layer.borderColor = (ok ? UIColor.systemGreen : UIColor.systemRed).cgColor
+            tv.layer.masksToBounds = true
+            if #available(iOS 13.0, *) { tv.layer.cornerCurve = .continuous }
+        }
+        .onBackspace { tv in
+            print("👈 backspace: len=\(tv.text?.count ?? 0)")
+        }
+        .byAddTo(self.view) { [unowned self] make in
+            make.top.equalTo(self.textField.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(36)
+        }
+}()
+
+private lazy var tvBlue: UITextView = { [unowned self] in
+    return UITextView()
+        .byAttributedText(NSMutableAttributedString(
+            string: "🔗 默认蓝色链接（系统样式）：",
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 15),
+                .foregroundColor: UIColor.secondaryLabel
+            ])
+            .add(NSAttributedString(
+                string: " Apple 官网",
+                attributes: [
+                    .link: URL(string: "https://www.apple.com")!,
+                    .font: UIFont.boldSystemFont(ofSize: 16)
+                ]))
+            .add(NSAttributedString(
+                string: "\n客服电话：400-123-4567",
+                attributes: [.font: UIFont.systemFont(ofSize: 15)]
+            )))
+        .byEditable(false)
+        .bySelectable(true)
+        .byDataDetectorTypes([.link, .phoneNumber])   // 系统自动识别
+        .byTextContainerInset(UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10))
+        .byRoundedBorder(color: .systemGray4, width: 1, radius: 8)
+        .byAddTo(self.view) { [unowned self] make in
+            make.top.equalTo(self.tv.snp.bottom).offset(12)   // 紧跟在 tv 下面
+            make.centerX.equalToSuperview()
+            make.height.equalTo(36)
+        }
+}()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>D6163A2E-091E-4B52-9FB4-A0F92DC00D2C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@UITextView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

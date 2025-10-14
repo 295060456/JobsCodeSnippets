@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//
+//  UIAlertController+BG.swift
+//  JobsSwiftBaseConfigDemo
+//
+//  Created by Jobs on 2025/6/16.
+//
+
+#if os(OSX)
+import AppKit
+#endif
+
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
+
+#if canImport(RxSwift) &amp;&amp; canImport(RxCocoa)
+import RxSwift
+import RxCocoa
+#endif
+
+import NSObject_Rx
+import SnapKit
+
+// ================================== 构建 &amp; 配置 ==================================
+public extension UIAlertController {
+    // MARK: 工厂
+    @discardableResult
+    static func makeAlert(_ title: String? = nil,
+                          _ message: String? = nil) -&gt; UIAlertController {
+        UIAlertController(title: title, message: message, preferredStyle: .alert)
+    }
+
+    @discardableResult
+    static func makeActionSheet(_ title: String? = nil,
+                                _ message: String? = nil) -&gt; UIAlertController {
+        UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+    }
+
+    // MARK: 基础属性
+    @discardableResult
+    func byMessage(_ message: String?) -&gt; Self {
+        self.message = message
+        return self
+    }
+
+    @available(iOS 16.0, *)
+    @discardableResult
+    func bySeverity(_ severity: UIAlertControllerSeverity) -&gt; Self {
+        self.severity = severity
+        return self
+    }
+
+    @discardableResult
+    func byTintColor(_ color: UIColor?) -&gt; Self {
+        if let color { self.view.tintColor = color }
+        return self
+    }
+
+    // MARK: Actions
+    @discardableResult
+    func byAddAction(title: String,
+                     style: UIAlertAction.Style = .default,
+                     isPreferred: Bool = false,
+                     handler: ((UIAlertAction) -&gt; Void)? = nil) -&gt; Self {
+        let action = UIAlertAction(title: title, style: style, handler: handler)
+        self.addAction(action)
+        if isPreferred { self.preferredAction = action }
+        return self
+    }
+
+    @discardableResult
+    func byAddAction(title: String,
+                     style: UIAlertAction.Style = .default,
+                     isPreferred: Bool = false,
+                     byActionBlock handler: @escaping (_ alert: UIAlertController, _ action: UIAlertAction) -&gt; Void) -&gt; Self {
+        let action = UIAlertAction(title: title, style: style) { [weak self] act in
+            guard let alert = self else { return }
+            handler(alert, act)
+        }
+        self.addAction(action)
+        if isPreferred { self.preferredAction = action }
+        return self
+    }
+
+    @discardableResult
+    func byAddOK(_ title: String = "确定",
+                 isPreferred: Bool = true,
+                 _ handler: ((UIAlertAction) -&gt; Void)? = nil) -&gt; Self {
+        byAddAction(title: title, style: .default, isPreferred: isPreferred, handler: handler)
+    }
+
+    @discardableResult
+    func byAddOK(_ title: String = "确定",
+                 isPreferred: Bool = true,
+                 _ handler: @escaping (_ alert: UIAlertController, _ action: UIAlertAction) -&gt; Void) -&gt; Self {
+        byAddAction(title: title, style: .default, isPreferred: isPreferred, byActionBlock: handler)
+    }
+
+    @discardableResult
+    func byAddCancel(_ title: String = "取消",
+                     _ handler: ((UIAlertAction) -&gt; Void)? = nil) -&gt; Self {
+        byAddAction(title: title, style: .cancel, handler: handler)
+    }
+
+    @discardableResult
+    func byAddCancel(_ title: String = "取消",
+                     _ handler: @escaping (_ alert: UIAlertController, _ action: UIAlertAction) -&gt; Void) -&gt; Self {
+        byAddAction(title: title, style: .cancel, byActionBlock: handler)
+    }
+
+    @discardableResult
+    func byAddDestructive(_ title: String,
+                          handler: ((UIAlertAction) -&gt; Void)? = nil) -&gt; Self {
+        byAddAction(title: title, style: .destructive, handler: handler)
+    }
+
+    @discardableResult
+    func byAddDestructive(_ title: String,
+                          withAlert handler: @escaping (_ alert: UIAlertController, _ action: UIAlertAction) -&gt; Void) -&gt; Self {
+        byAddAction(title: title, style: .destructive, byActionBlock: handler)
+    }
+
+    @discardableResult
+    func byPreferredAction(_ action: UIAlertAction?) -&gt; Self {
+        self.preferredAction = action
+        return self
+    }
+
+    @discardableResult
+    func byPreferredActionTitle(_ title: String) -&gt; Self {
+        if let hit = actions.first(where: { $0.title == title }) { self.preferredAction = hit }
+        return self
+    }
+
+    // MARK: TextFields（基础）
+    func textField(at index: Int) -&gt; UITextField? {
+        guard let tfs = self.textFields, (0..&lt;tfs.count).contains(index) else { return nil }
+        return tfs[index]
+    }
+}
+
+// ================================== TextField：RAC 监听（可选） ==================================
+#if canImport(RxSwift) &amp;&amp; canImport(RxCocoa)
+import RxSwift
+import RxCocoa
+
+final class JobsTextFieldDelegateProxy:
+    DelegateProxy&lt;UITextField, UITextFieldDelegate&gt;,
+    DelegateProxyType,
+    UITextFieldDelegate {
+
+    init(textField: UITextField) {
+        super.init(parentObject: textField, delegateProxy: JobsTextFieldDelegateProxy.self)
+    }
+
+    static func registerKnownImplementations() {
+        self.register { JobsTextFieldDelegateProxy(textField: $0) }
+    }
+
+    static func currentDelegate(for object: UITextField) -&gt; UITextFieldDelegate? { object.delegate }
+    static func setCurrentDelegate(_ delegate: UITextFieldDelegate?, to object: UITextField) { object.delegate = delegate }
+}
+
+public extension UIAlertController {
+    @discardableResult
+    func byAddTextField(placeholder: String?,
+                        text: String? = nil,
+                        isSecure: Bool = false,
+                        keyboard: UIKeyboardType = .default,
+                        returnKey: UIReturnKeyType = .done,
+                        textContentType: UITextContentType = .password,
+                        leftView: UIView? = nil,
+                        rightView: UIView? = nil,
+                        autocorrection: UITextAutocorrectionType = .default,
+                        capitalization: UITextAutocapitalizationType = .none,
+                        contentType: UITextContentType? = nil,
+                        // 样式（可选）
+                        borderWidth: CGFloat? = nil,
+                        borderColor: UIColor? = nil,
+                        cornerRadius: CGFloat? = nil,
+                        onChange: @escaping (_ alert: UIAlertController,
+                                             _ tf: UITextField,
+                                             _ input: String,
+                                             _ oldText: String,
+                                             _ isDeleting: Bool) -&gt; Void) -&gt; Self {
+        self.addTextField { [weak self] tf in
+            tf.byPlaceholder(placeholder)
+                .byText(text)
+                .byReturnKeyType(returnKey)
+                .byTextContentType(textContentType)
+                .byLeftView(leftView)
+                .byRightView(rightView)
+                .bySecureTextEntry(isSecure)
+                .byKeyboardType(keyboard)
+                .byAutocorrectionType(autocorrection)
+                .byAutocapitalizationType(capitalization)
+                .byTextContentType(contentType)
+
+            var didStyle = false
+            if let w = borderWidth { tf.layer.borderWidth = w; didStyle = true }
+            if let c = borderColor { tf.layer.borderColor = c.cgColor; didStyle = true }
+            if let r = cornerRadius { tf.layer.cornerRadius = r; didStyle = true }
+            if didStyle {
+                tf.layer.masksToBounds = true
+                if #available(iOS 13.0, *) { tf.layer.cornerCurve = .continuous }
+            }
+
+            guard let alert = self else { return }
+            var previousText = tf.text ?? ""
+
+            tf.rx.controlEvent(.editingChanged)
+                .subscribe(onNext: { [weak alert, weak tf] in
+                    guard let alert = alert, let tf = tf else { return }
+                    let currentText = tf.text ?? ""
+                    let isDeleting = currentText.count &lt; previousText.count
+                    var input = ""
+                    if !isDeleting {
+                        if currentText.hasPrefix(previousText) {
+                            input = String(currentText.dropFirst(previousText.count))
+                        } else {
+                            input = currentText
+                        }
+                    }
+                    onChange(alert, tf, input, previousText, isDeleting)
+                    previousText = currentText
+                })
+                .disposed(by: tf.disposeBag)
+        }
+        return self
+    }
+}
+#endif
+
+// ================================== 统一锚点 &amp; 一行展示 ==================================
+public extension UIAlertController {
+    enum Anchor {
+        case auto
+        case barButton(UIBarButtonItem)
+        case view(UIView, CGRect? = nil, UIPopoverArrowDirection = [])
+    }
+
+    @discardableResult
+    func byAnchor(_ anchor: Anchor, host: UIViewController) -&gt; Self {
+        guard let pop = self.popoverPresentationController else { return self }
+        switch anchor {
+        case .barButton(let item):
+            pop.barButtonItem = item
+        case .view(let v, let rect, let arrows):
+            pop.sourceView = v
+            pop.sourceRect = rect ?? v.bounds
+            pop.permittedArrowDirections = arrows
+        case .auto:
+            pop.sourceView = host.view
+            pop.sourceRect = CGRect(x: host.view.bounds.midX,
+                                    y: host.view.bounds.maxY - 1,
+                                    width: 1, height: 1)
+            pop.permittedArrowDirections = []
+        }
+        return self
+    }
+
+    /// present：与系统转场协调执行（本地背景将被“强制同步安装”）
+    @discardableResult
+    func byPresent(_ vc: UIViewController,
+                   anchor: Anchor = .auto,
+                   animated: Bool = true,
+                   completion: (() -&gt; Void)? = nil) -&gt; Self {
+
+        let isSheet: Bool = {
+            switch vc.modalPresentationStyle {
+            case .pageSheet, .formSheet, .automatic: return true
+            default: return false
+            }
+        }()
+
+        let host = (isSheet ? vc.presentingViewController : nil) ?? vc
+
+        if self.popoverPresentationController != nil {
+            self.byAnchor(anchor, host: host)
+        }
+
+        // 🚀 关键：在 present 之前强制加载 view 并同步安装本地图（避免你说的“本地不显示”）
+        self.loadViewIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        _installLocalBGIfPending() // 尽力先装一次
+
+        host.present(self, animated: animated) { [weak self] in
+            guard let self else { completion?(); return }
+
+            if let tc = self.transitionCoordinator {
+                tc.animate(alongsideTransition: { _ in
+                    // 再次确保本地背景已就位（与系统动画同帧，无闪烁）
+                    UIView.performWithoutAnimation {
+                        self._installLocalBGIfPending()
+                        self._drainPreBGTasks()
+                    }
+                }, completion: { _ in
+                    self._drainPostBGTasks()
+                    // 再兜底一次：下一轮 RunLoop
+                    DispatchQueue.main.async { [weak self] in
+                        self?._installLocalBGIfPending()
+                        self?._drainPostBGTasks()
+                    }
+                })
+            } else {
+                // 没有协调器（极少数情况）：按顺序兜底
+                UIView.performWithoutAnimation {
+                    self._installLocalBGIfPending()
+                    self._drainPreBGTasks()
+                }
+                self._drainPostBGTasks()
+                DispatchQueue.main.async { [weak self] in
+                    self?._installLocalBGIfPending()
+                    self?._drainPostBGTasks()
+                }
+            }
+            completion?()
+        }
+        return self
+    }
+}
+
+// MARK: - AO（UInt8 哨兵）
+private struct _JobsAO {
+    // 背景安装任务队列（转场前/后各一队）——仅用于“非背景图”的任务
+    static var bgTasksPreKey:  UInt8 = 0
+    static var bgTasksPostKey: UInt8 = 0
+
+    // 本地背景（同步优先安装）
+    static var localBGImageKey: UInt8 = 0
+    static var localBGHideBackdropKey: UInt8 = 0
+}
+private extension UIAlertController {
+    typealias _BGTask = (UIAlertController) -&gt; Void
+
+    var _bgTasksPre:  [_BGTask] {
+        get { (objc_getAssociatedObject(self, &amp;_JobsAO.bgTasksPreKey)  as? [_BGTask]) ?? [] }
+        set { objc_setAssociatedObject(self, &amp;_JobsAO.bgTasksPreKey,  newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+    var _bgTasksPost: [_BGTask] {
+        get { (objc_getAssociatedObject(self, &amp;_JobsAO.bgTasksPostKey) as? [_BGTask]) ?? [] }
+        set { objc_setAssociatedObject(self, &amp;_JobsAO.bgTasksPostKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+
+    func _enqueueBGTask(preTransition: Bool, _ task: @escaping _BGTask) {
+        if preTransition { _bgTasksPre.append(task) } else { _bgTasksPost.append(task) }
+    }
+    func _drainPreBGTasks()  { let t = _bgTasksPre;  _bgTasksPre.removeAll();  t.forEach { $0(self) } }
+    func _drainPostBGTasks() { let t = _bgTasksPost; _bgTasksPost.removeAll(); t.forEach { $0(self) } }
+
+    // -------- 本地背景 AO --------
+    var _localBGImage: UIImage? {
+        get { objc_getAssociatedObject(self, &amp;_JobsAO.localBGImageKey) as? UIImage }
+        set { objc_setAssociatedObject(self, &amp;_JobsAO.localBGImageKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+    var _localBGHideBackdrop: Bool {
+        get { (objc_getAssociatedObject(self, &amp;_JobsAO.localBGHideBackdropKey) as? Bool) ?? true }
+        set { objc_setAssociatedObject(self, &amp;_JobsAO.localBGHideBackdropKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
+// MARK: - 背景图（本地 / SD / KF）— 本地“强制同步”，网络“转场后淡入”
+public extension UIAlertController {
+    /// 本地图片：**强制同步安装**（present 前尝试一次；转场开始时再确保一次）
+    @discardableResult
+    func byBgImage(
+        _ image: UIImage?,
+        hideSystemBackdrop: Bool = true
+    ) -&gt; Self {
+        _localBGImage = image ?? jobsSolidBlue()
+        _localBGHideBackdrop = hideSystemBackdrop
+
+        // 立即尝试安装一次（如 view 已加载即可生效）
+        self.loadViewIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        _installLocalBGIfPending()
+        return self
+    }
+
+    /// SD：URL 为空则只装本地图；有 URL 时转场后淡入网络图
+    @discardableResult
+    func bySDBgImageView(
+        _ url: String,
+        image: UIImage? = nil,
+        hideSystemBackdrop: Bool = true,
+        crossfade: TimeInterval = 0.2
+    ) -&gt; Self {
+        // 1) 先同步安装本地占位（保证“立刻能看见”）
+        _ = byBgImage(image ?? jobsSolidBlue(), hideSystemBackdrop: hideSystemBackdrop)
+
+        // 2) 再在转场完成后淡入网络图
+        let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return self }
+
+        _enqueueBGTask(preTransition: false) { alert in
+            Task { @MainActor in
+                alert._withAlertCard { card in
+                    let iv = alert._ensureBGImageView(in: card)
+                    let placeholder = iv.image ?? (image ?? jobsSolidBlue())
+                    let img = await trimmed.sdLoadImage(fallbackImage: placeholder)
+                    if crossfade &gt; 0 {
+                        alert._crossfade(iv, to: img, duration: crossfade)
+                    } else {
+                        iv.image = img
+                    }
+                    iv.layer.cornerRadius = card.layer.cornerRadius
+                }
+            }
+        }
+        return self
+    }
+
+    /// KF：URL 为空则只装本地图；有 URL 时转场后淡入网络图
+    @discardableResult
+    func byKFBgImageView(
+        _ url: String,
+        image: UIImage? = nil,
+        hideSystemBackdrop: Bool = true,
+        crossfade: TimeInterval = 0.2
+    ) -&gt; Self {
+        // 1) 先同步安装本地占位
+        _ = byBgImage(image ?? jobsSolidBlue(), hideSystemBackdrop: hideSystemBackdrop)
+
+        // 2) 再转场后淡入网络图
+        let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return self }
+
+        _enqueueBGTask(preTransition: false) { alert in
+            Task { @MainActor in
+                alert._withAlertCard { card in
+                    let iv = alert._ensureBGImageView(in: card)
+                    let placeholder = iv.image ?? (image ?? jobsSolidBlue())
+                    let img = await trimmed.kfLoadImage(fallbackImage: placeholder)
+                    if crossfade &gt; 0 {
+                        alert._crossfade(iv, to: img, duration: crossfade)
+                    } else {
+                        iv.image = img
+                    }
+                    iv.layer.cornerRadius = card.layer.cornerRadius
+                }
+            }
+        }
+        return self
+    }
+
+    /// 给 Alert 卡片加描边（外层容器，不是输入框）
+    @discardableResult
+    func byCardBorder(width: CGFloat,
+                      color: UIColor,
+                      cornerRadius: CGFloat? = nil) -&gt; Self {
+        _enqueueBGTask(preTransition: true) { alert in
+            Task { @MainActor in
+                alert._withAlertCard { card in
+                    card.layer.borderWidth = width
+                    card.layer.borderColor = color.cgColor
+                    if let r = cornerRadius { card.layer.cornerRadius = r }
+                    card.layer.masksToBounds = true
+                    if #available(iOS 13.0, *) { card.layer.cornerCurve = .continuous }
+                }
+            }
+        }
+        return self
+    }
+
+    /// 给指定 index 的输入框「外层灰色容器」描边（不是 UITextField 自身）
+    @discardableResult
+    func byTextFieldOuterBorder(at index: Int = 0,
+                                width: CGFloat,
+                                color: UIColor,
+                                cornerRadius: CGFloat? = nil,
+                                insets: UIEdgeInsets = .zero) -&gt; Self {
+        _enqueueBGTask(preTransition: true) { alert in
+            Task { @MainActor in
+                alert._withAlertCard { _ in
+                    guard let tf = alert.textField(at: index) else { return }
+                    guard let box = alert._findTextFieldBox(for: tf) else { return }
+
+                    let tag = 0x7F_54_19
+                    let borderView: UIView
+                    if let exist = box.viewWithTag(tag) {
+                        borderView = exist
+                    } else {
+                        let v = UIView()
+                        v.isUserInteractionEnabled = false
+                        v.backgroundColor = .clear
+                        v.tag = tag
+                        box.insertSubview(v, belowSubview: tf) // 放在 tf 下层，不挡交互
+                        v.snp.makeConstraints { make in
+                            make.edges.equalToSuperview().inset(insets)
+                        }
+                        borderView = v
+                    }
+
+                    borderView.layer.borderWidth = width
+                    borderView.layer.borderColor = color.cgColor
+                    borderView.layer.cornerRadius = cornerRadius ?? box.layer.cornerRadius
+                    borderView.layer.masksToBounds = true
+                    if #available(iOS 13.0, *) { borderView.layer.cornerCurve = .continuous }
+                }
+            }
+        }
+        return self
+    }
+}
+// MARK: - 私有：找卡片 / 安装背景 / 视觉
+public extension UIAlertController {
+    /// 找到整张 Alert 的“卡片视图”
+    @MainActor
+    fileprivate func _findAlertCardView() -&gt; UIView? {
+        // 0) 优先：选“可见的、非根视图的、带圆角的、面积最大的”那个
+        let all = view._allSubviews()
+        let rounded = all.filter {
+            $0 !== view &amp;&amp;
+            !$0.isHidden &amp;&amp;
+            $0.alpha &gt; 0.01 &amp;&amp;
+            $0.layer.cornerRadius &gt; 1 &amp;&amp;
+            $0.bounds.width &gt; 20 &amp;&amp; $0.bounds.height &gt; 20
+        }
+        if let big = rounded.max(by: { ($0.bounds.width * $0.bounds.height) &lt; ($1.bounds.width * $1.bounds.height) }) {
+            return big
+        }
+
+        // 1) 次选：通过 title/message 的 UILabel 往上找
+        let labels = all.compactMap { $0 as? UILabel }
+        if let anchor = labels.first(where: { $0.text == title || $0.text == message }),
+           let roundedFromLabel = anchor._firstAncestor(where: { $0.layer.cornerRadius &gt; 0 }) {
+            return roundedFromLabel
+        }
+
+        // 2) UIVisualEffectView superview 作为兜底
+        if let effect = all.compactMap({ $0 as? UIVisualEffectView }).last,
+           let sup = effect.superview, sup.layer.cornerRadius &gt; 0 {
+            return sup
+        }
+
+        // 3) 最后兜底：仍然挑面积最大的圆角视图；都没有就用根 view
+        let anyRounded = all.filter { $0.layer.cornerRadius &gt; 0 }
+        return anyRounded.max(by: { ($0.bounds.width * $0.bounds.height) &lt; ($1.bounds.width * $1.bounds.height) }) ?? view
+    }
+
+    /// 安装/复用底层背景图（SnapKit 约束，不参与撑大）
+    @MainActor
+    fileprivate func _ensureBGImageView(in container: UIView) -&gt; UIImageView {
+        if let exist = container.subviews.first(where: {
+            ($0 as? UIImageView)?.accessibilityIdentifier == "jobs.alert.bg"
+        }) as? UIImageView {
+            return exist
+        }
+
+        let iv = UIImageView()
+            .byUserInteractionEnabled(false)
+            .byClipsToBounds(true)
+            .byContentMode(.scaleAspectFill)
+        iv.accessibilityIdentifier = "jobs.alert.bg"
+
+        // 降低“存在感”
+        iv.setContentHuggingPriority(.init(1), for: .horizontal)
+        iv.setContentHuggingPriority(.init(1), for: .vertical)
+        iv.setContentCompressionResistancePriority(.init(1), for: .horizontal)
+        iv.setContentCompressionResistancePriority(.init(1), for: .vertical)
+
+        container.insertSubview(iv, at: 0)
+        iv.snp.makeConstraints { make in
+            make.edges.equalToSuperview()   // ✅ 只贴边，不加 &lt;= 约束，避免奇怪收缩
+        }
+
+        return iv
+    }
+}
+// MARK: - 私有：同步安装“本地背景”
+private extension UIAlertController {
+    @discardableResult
+    @MainActor
+    func _installLocalBGIfPending() -&gt; Bool {
+        guard let img = _localBGImage else { return false }
+        var did = false
+        _withAlertCard { [weak self] card in
+            guard let self else { return }
+            if self._localBGHideBackdrop { self._hideBackdropAll(in: card) }
+            let iv = self._ensureBGImageView(in: card)
+            // ✅ 关键：整卡片裁剪，背景图按圆角贴合整张卡片
+            card.layer.masksToBounds = true
+            iv.layer.cornerRadius = card.layer.cornerRadius
+            iv.layer.masksToBounds = true
+            UIView.performWithoutAnimation {
+                iv.image = img
+                iv.layoutIfNeeded()
+            }
+            did = true
+        }
+        return did
+    }
+}
+
+public extension UIAlertController {
+    /// 在“整张 Alert 卡片”就绪后执行（找不到卡片则下一轮 RunLoop 再试一次，最后用根 view 兜底）
+    @MainActor
+    fileprivate func _withAlertCard(_ body: @escaping (_ card: UIView) async -&gt; Void) {
+        if let card = _findAlertCardView() {
+            Task { @MainActor in await body(card) }
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let card: UIView = self._findAlertCardView() ?? self.view
+            Task { @MainActor in await body(card) }
+        }
+    }
+
+    /// 隐掉所有毛玻璃，并清掉容器底色（供本地/网络背景生效时使用）
+    @MainActor
+    fileprivate func _hideBackdropAll(in card: UIView) {
+        func hideEffect(in v: UIView) {
+            if v is UIVisualEffectView { v.isHidden = true }
+            v.subviews.forEach(hideEffect)
+        }
+        hideEffect(in: card)
+        card.backgroundColor = .clear
+        view.backgroundColor = .clear
+    }
+    @MainActor
+    fileprivate func _crossfade(_ iv: UIImageView,
+                                to image: UIImage,
+                                duration: TimeInterval) {
+        guard duration &gt; 0 else {
+            iv.image = image
+            return
+        }
+        UIView.transition(with: iv,
+                          duration: duration,
+                          options: .transitionCrossDissolve,
+                          animations: { iv.image = image },
+                          completion: nil)
+    }
+    // 找到 UITextField 外层的“灰底容器”（用于描边等）
+    // 说明：不同 iOS 版本层级不同，这里用一套保守启发式：
+    //  - 先看父/祖视图是否像容器（有圆角 / 有可见背景 / 是毛玻璃）
+    //  - 再向上逐级找第一个“像容器”的祖先
+    @MainActor
+    fileprivate func _findTextFieldBox(for tf: UITextField) -&gt; UIView? {
+        func looksLikeBox(_ v: UIView) -&gt; Bool {
+            if v === tf { return false }
+            if v.layer.cornerRadius &gt; 0 { return true }
+            if (v.backgroundColor?.cgColor.alpha ?? 0) &gt; 0.01 { return true }
+            if v is UIVisualEffectView { return true }
+            return false
+        }
+
+        // 1) 直接父视图命中
+        if let s1 = tf.superview, looksLikeBox(s1) { return s1 }
+        // 2) 祖父视图命中
+        if let s2 = tf.superview?.superview, looksLikeBox(s2) { return s2 }
+
+        // 3) 向上逐级查找
+        var p = tf.superview
+        while let v = p {
+            if looksLikeBox(v) { return v }
+            p = v.superview
+        }
+
+        // 4) 兜底：在同级容器里找一个“像容器”的兄弟视图
+        if let container = tf.superview?.superview {
+            for v in container.subviews where v !== tf {
+                if looksLikeBox(v) { return v }
+            }
+        }
+        return nil
+    }
+
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>113DBBDE-5F8D-489F-846E-F59296765C4A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>My Code Snippet</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
