@@ -49,6 +49,19 @@
             self.passwordTF.togglePasswordVisibility()
             print("👁 当前状态：\(sender.isSelected ? "隐藏密码" : "显示密码")")
         }
+        /// 右上角提示文案@小红点
+        .byCornerDot(diameter: 10, offset: .init(horizontal: -4, vertical: 4))// 红点
+        /// 右上角提示文案@文字
+        .byCornerBadgeText("NEW") { cfg in
+            cfg.byOffset(.init(horizontal: -6, vertical: 6))
+                .byInset(.init(top: 2, left: 6, bottom: 2, right: 6))
+                .byBgColor(.systemRed)
+                .byFont(.systemFont(ofSize: 11, weight: .bold))
+                .byShadow(color: UIColor.black.withAlphaComponent(0.25),
+                          radius: 2,
+                          opacity: 0.6,
+                          offset: .init(width: 0, height: 1))
+        }
         /// 事件触发@长按
         .onLongPress(minimumPressDuration: 0.8) { btn, gr in
              if gr.state == .began {
