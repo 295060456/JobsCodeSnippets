@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@WKWebView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>import WebKit
+
+private lazy var webView: WKWebView = {
+    WKWebView(frame: .zero, configuration: WKWebViewConfiguration()
+        .byWebsiteDataStore(.default())
+        .byAllowsInlineMediaPlayback(true)
+        .byUserContentController(WKUserContentController().byAddUserScript(Self.makeBridgeUserScript()))
+        .byDefaultWebpagePreferences { wp in
+            wp.allowsContentJavaScript = true
+        }
+    )
+    .byAddTo(view) { [unowned self] make in
+        make.top.equalTo(textField.snp.bottom).offset(12)
+        make.centerX.equalToSuperview()
+        make.height.equalTo(36)
+    }
+}()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3A1B27D1-5A0D-4BD3-ACFE-5647ACF0D8E6</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@WKWebView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
