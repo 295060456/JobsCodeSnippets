@@ -23,6 +23,6 @@ print("SomeThing in bundle:", all.map { $0.lastPathComponent })</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>0</integer>
+	<integer>2</integer>
 </dict>
 </plist>
