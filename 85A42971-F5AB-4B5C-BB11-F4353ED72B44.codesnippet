@@ -13,54 +13,42 @@
 import SnapKit
 
 class TextFieldVC: UIViewController {
-
-    // ==================================
-    // MARK: 生命周期 Life Cycle
-    // ==================================
-
-    // 1️⃣ 初始化阶段
+    /// 1️⃣ 初始化阶段
     override func loadView() {
         super.loadView()
         print("🟢 loadView() - 负责创建或加载视图层级")
     }
-
-    // 2️⃣ 视图加载完成（适合初始化数据、绑定、UI配置）
+    /// 2️⃣ 视图加载完成（适合初始化数据、绑定、UI配置）
     override func viewDidLoad() {
         super.viewDidLoad()
         print("🟢 viewDidLoad() - 视图加载完成，可安全访问 self.view")
     }
-
-    // 3️⃣ 视图即将出现（适合控制状态栏、导航栏显示、动画准备）
+    /// 3️⃣ 视图即将出现（适合控制状态栏、导航栏显示、动画准备）
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("🟠 viewWillAppear() - 视图即将显示")
     }
-
-    // 4️⃣ 视图已出现（适合动画、网络请求等）
+    /// 4️⃣ 视图已出现（适合动画、网络请求等）
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("🟢 viewDidAppear() - 视图已显示完成")
     }
-
-    // 5️⃣ 视图即将消失（适合保存状态、取消任务）
+    /// 5️⃣ 视图即将消失（适合保存状态、取消任务）
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("🟡 viewWillDisappear() - 视图即将被移除")
     }
-
-    // 6️⃣ 视图已消失（适合释放资源、通知）
+    /// 6️⃣ 视图已消失（适合释放资源、通知）
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("🔴 viewDidDisappear() - 视图已被移除")
     }
-
-    // 7️⃣ 内存警告（iOS 低内存时触发）
+    /// 7️⃣ 内存警告（iOS 低内存时触发）
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("⚠️ didReceiveMemoryWarning() - 收到内存警告")
     }
-
-    // 8️⃣ 销毁（对象释放）
+    /// 8️⃣ 销毁（对象释放）
     deinit {
         print("💀 deinit - 控制器已销毁")
     }

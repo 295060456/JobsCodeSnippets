@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@FlowLayout</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>private lazy var flowLayout: UICollectionViewFlowLayout = {
+    UICollectionViewFlowLayout()
+        .byScrollDirection(.vertical)
+        .byMinimumLineSpacing(10)
+        .byMinimumInteritemSpacing(10)
+        .bySectionInset(UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12))
+}()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>EE7A6960-DA28-4B6F-ADBD-B72E86F39806</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@UICollectionViewFlowLayout</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
