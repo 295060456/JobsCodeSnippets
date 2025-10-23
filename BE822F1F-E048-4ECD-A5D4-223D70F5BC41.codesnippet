@@ -37,10 +37,11 @@
                 print("✅ 下拉刷新完成")
             }
         }, config: { animator in
-            animator.idleDescription = "下拉刷新"
-            animator.releaseToRefreshDescription = "松开立即刷新"
-            animator.loadingDescription = "正在刷新中..."
-            animator.noMoreDataDescription = "已经是最新数据"
+            animator
+                .byIdleDescription("Jobs@下拉刷新")
+                .byReleaseToRefreshDescription("Jobs@松开立即刷新")
+                .byLoadingDescription("Jobs@正在刷新中...")
+                .byNoMoreDataDescription("Jobs@已经是最新数据")
         })
         // 上拉加载（自定义 JobsFooterAnimator）
         .pullUpWithJobsAnimator({ [weak self] in
@@ -55,10 +56,11 @@
                 print("✅ 上拉加载完成")
             }
         }, config: { animator in
-            animator.idleDescription = "上拉加载更多"
-            animator.releaseToRefreshDescription = "松开立即加载"
-            animator.loadingMoreDescription = "加载中..."
-            animator.noMoreDataDescription = "已经到底了～"
+            animator
+                .byIdleDescription("Jobs@上拉加载更多")
+                .byReleaseToRefreshDescription("Jobs@松开立即加载")
+                .byLoadingMoreDescription("Jobs@加载中…")
+                .byNoMoreDataDescription("Jobs@没有更多数据")
         })
         .byAddTo(view) { make in
             make.edges.equalToSuperview()

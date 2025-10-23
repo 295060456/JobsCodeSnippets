@@ -10,7 +10,7 @@
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>private lazy var exampleButton: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         /// 普通字符串@设置主标题
         .byTitle("显示", for: .normal)
         .byTitle("隐藏", for: .selected)
@@ -96,7 +96,7 @@
 }()
 // MARK: - 倒计时演示按钮（同一套 API：传 total =&gt; 倒计时）
 private lazy var countdownButton: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         .byTitle("获取验证码", for: .normal)
         .byTitleColor(.white, for: .normal)
         .byBackgroundColor(.systemGreen, for: .normal)

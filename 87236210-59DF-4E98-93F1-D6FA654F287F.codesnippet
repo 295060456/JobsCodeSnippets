@@ -11,7 +11,7 @@
 	<key>IDECodeSnippetContents</key>
 	<string>/// 按钮网络背景图@SDWebImage
 private lazy var btnBG: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         .byCornerRadius(12)
         .byClipsToBounds(true)
         .byTitle("我是主标题@SDWebImage")
@@ -29,7 +29,7 @@ private lazy var btnBG: UIButton = {
 }()
 /// 按钮网络前景图@SDWebImage
 private lazy var btnImage: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         .byCornerRadius(12)
         .byBorderWidth(1)
         .byBorderColor(UIColor.systemGray3)
@@ -49,7 +49,7 @@ private lazy var btnImage: UIButton = {
 }()
 /// 按钮网络背景图@Kingfisher
 private lazy var btnBG_KF: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         .byCornerRadius(12)
         .byClipsToBounds(true)
         .byTitle("我是主标题@Kingfisher")
@@ -73,7 +73,7 @@ private lazy var btnBG_KF: UIButton = {
 }()
 /// 按钮网络前景图@Kingfisher
 private lazy var btnImage_KF: UIButton = {
-    UIButton(type: .system)
+    UIButton.sys()
         .byCornerRadius(12)
         .byBorderWidth(1)
         .byBorderColor(UIColor.systemGray3)
