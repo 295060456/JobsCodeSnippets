@@ -96,7 +96,7 @@
                 )
                 reply(nil)
             }
-    }()</string>
+}()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>F190511A-E843-4154-9ADF-F75BC4BA55CB</string>
 	<key>IDECodeSnippetLanguage</key>

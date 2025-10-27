@@ -74,7 +74,7 @@ private lazy var wrapperImgViewSD: UIImageView = {
             make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(20)
             make.height.equalTo(180)
         }
-    }()</string>
+}()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>7E33EADB-8A2C-43D1-9104-A95BAFFF0D82</string>
 	<key>IDECodeSnippetLanguage</key>
