@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>Jobs@Gesture</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// MARK: - 点击 Tap
+UIView().jobs_addGesture(
+    UITapGestureRecognizer
+        .byConfig { gr in
+            print("Tap 触发 on: \(String(describing: gr.view))")
+        }
+        .byTaps(2)                       // 双击
+        .byTouches(1)                    // 单指
+        .byCancelsTouchesInView(true)
+        .byEnabled(true)
+        .byName("customTap")
+)
+// MARK: - 长按 LongPress
+UIView().addGestureRecognizer(
+    UILongPressGestureRecognizer
+        .byConfig { gr in
+            if gr.state == .began {
+                print("长按开始")
+            } else if gr.state == .ended {
+                print("长按结束")
+            }
+        }
+        .byMinDuration(0.8)              // 最小按压时长
+        .byMovement(12)                  // 允许移动距离
+        .byTouches(1)                    // 单指
+)
+// MARK: - 拖拽 Pan
+UIView().jobs_addGesture(
+    UIPanGestureRecognizer
+        .byConfig { gr in
+            let p = (gr as! UIPanGestureRecognizer).translation(in: gr.view)
+            if gr.state == .changed {
+                print("拖拽中: \(p)")
+            } else if gr.state == .ended {
+                print("拖拽结束")
+            }
+        }
+        .byMinTouches(1)
+        .byMaxTouches(2)
+        .byCancelsTouchesInView(true)
+)
+// MARK: - 轻扫 Swipe（单方向）
+UIView().jobs_addGesture(
+    UISwipeGestureRecognizer
+        .byConfig { _ in
+            print("👉 右滑触发")
+        }
+        .byDirection(.right)
+        .byTouches(1)
+)
+// MARK: - 轻扫 Swipe（多方向）
+let swipeContainer = UIView()
+swipeContainer.jobs_addGesture(
+    UISwipeGestureRecognizer
+        .byConfig { _ in print("← 左滑") }
+        .byDirection(.left)
+)
+swipeContainer.jobs_addGesture(
+    UISwipeGestureRecognizer
+        .byConfig { _ in print("→ 右滑") }
+        .byDirection(.right)
+)
+swipeContainer.jobs_addGesture(
+    UISwipeGestureRecognizer
+        .byConfig { _ in print("↑ 上滑") }
+        .byDirection(.up)
+)
+swipeContainer.jobs_addGesture(
+    UISwipeGestureRecognizer
+        .byConfig { _ in print("↓ 下滑") }
+        .byDirection(.down)
+)
+// MARK: - 捏合 Pinch
+UIView().jobs_addGesture(
+    UIPinchGestureRecognizer
+        .byConfig { _ in }
+        .byOnScaleChange { gr, scale in
+            if gr.state == .changed {
+                print("缩放比例: \(scale)")
+            }
+        }
+        .byScale(1.0)
+)
+// MARK: - 旋转 Rotate
+UIView().jobs_addGesture(
+    UIRotationGestureRecognizer
+        .byConfig { _ in }
+        .byOnRotationChange { gr, r in
+            if gr.state == .changed {
+                print("旋转角度(弧度): \(r)")
+            }
+        }
+        .byRotation(0)
+)
+// MARK: - 直接设置手势（已锚定视图）
+let views = UIView()
+    .addTapAction { gr in
+        print("点击 \(gr.view!)")
+    }
+    .addLongPressAction { gr in
+        if gr.state == .began { print("长按开始") }
+    }
+    .addPanAction { gr in
+        let p = (gr as! UIPanGestureRecognizer).translation(in: gr.view)
+        print("拖拽中: \(p)")
+    }
+    .addPinchAction { gr in
+        let scale = (gr as! UIPinchGestureRecognizer).scale
+        print("缩放比例：\(scale)")
+    }
+    .addRotationAction { gr in
+        let rotation = (gr as! UIRotationGestureRecognizer).rotation
+        print("旋转角度：\(rotation)")
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8A60467C-E0E9-407D-A3FD-F856260C77A8</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>👋</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@手势</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
