@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>if view.jobs_hasVisibleTopBar() {
+    make.top.equalTo(self.gk_navigationBar.snp.bottom).offset(10)
+} else {
+    make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>A9977F0D-D0A5-4F2A-9FC1-1EF1E0684531</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>一些快捷的写法</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift@</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
