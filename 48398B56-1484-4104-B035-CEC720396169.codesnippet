@@ -11,6 +11,8 @@
 	<key>IDECodeSnippetContents</key>
 	<string>private lazy var exampleButton: UIButton = {
     UIButton.sys()
+        /// 背景色
+        .byBackgroundColor(.systemGreen, for: .normal)
         /// 普通字符串@设置主标题
         .byTitle("显示", for: .normal)
         .byTitle("隐藏", for: .selected)
