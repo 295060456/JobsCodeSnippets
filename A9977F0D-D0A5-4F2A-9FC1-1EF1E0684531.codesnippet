@@ -13,7 +13,9 @@
     make.top.equalTo(self.gk_navigationBar.snp.bottom).offset(10)
 } else {
     make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-}</string>
+}
+
+jobsSetupGKNav(title: "Lottie 动画")</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>A9977F0D-D0A5-4F2A-9FC1-1EF1E0684531</string>
 	<key>IDECodeSnippetLanguage</key>
