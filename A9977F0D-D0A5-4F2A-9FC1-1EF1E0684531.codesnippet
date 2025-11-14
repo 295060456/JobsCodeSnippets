@@ -15,7 +15,75 @@
     make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
 }
 
-jobsSetupGKNav(title: "Lottie 动画")</string>
+jobsSetupGKNav(title: "Lottie 动画")
+
+jobsSetupGKNav(
+    title: "Demo 列表",
+    leftButton:UIButton.sys()
+        .byFrame(CGRect(x: 0, y: 0, width: 32.w, height: 32.h))
+        /// 按钮图片@图文关系
+        .byImage("list.bullet".sysImg, for: .normal)
+        .byImage("list.bullet".sysImg, for: .selected)
+        /// 事件触发@点按
+        .onTap { sender in
+            sender.isSelected.toggle()
+            debugOnly {  // 仅 Debug 执行
+                toastBy("点按了列表按钮")
+            }
+        }
+        /// 事件触发@长按
+        .onLongPress(minimumPressDuration: 0.8) { btn, gr in
+             if gr.state == .began {
+                 btn.alpha = 0.6
+                 print("长按开始 on \(btn)")
+             } else if gr.state == .ended || gr.state == .cancelled {
+                 btn.alpha = 1.0
+                 print("长按结束")
+             }
+        },
+    rightButtons: [
+        UIButton.sys()
+            /// 按钮图片@图文关系
+            .byImage("moon.circle.fill".sysImg, for: .normal)
+            .byImage("moon.circle.fill".sysImg, for: .selected)
+            /// 事件触发@点按
+            .onTap { sender in
+                sender.isSelected.toggle()
+                guard let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let win = ws.windows.first else { return }
+                win.overrideUserInterfaceStyle =
+                    (win.overrideUserInterfaceStyle == .dark) ? .light : .dark
+                print("🌓 主题已切换 -&gt; \(win.overrideUserInterfaceStyle == .dark ? "Dark" : "Light")")
+            },
+        UIButton.sys()
+            /// 按钮图片@图文关系
+            .byImage("globe".sysImg, for: .normal)
+            .byImage("globe".sysImg, for: .selected)
+            /// 事件触发@点按
+            .onTap { [weak self] sender in
+                guard let self else { return }
+                sender.isSelected.toggle()
+                let to = (LanguageManager.shared.currentLanguageCode == "zh-Hans") ? "en" : "zh-Hans"
+                LanguageManager.shared.switchTo(to)
+//                        var s = "🔑 注册登录".tr
+                demos = makeDemos()
+                tableView.reloadData()
+                print("🌐 切换语言 tapped（占位）")
+            },
+        UIButton.sys()
+            /// 按钮图片@图文关系
+            .byImage("stop.circle.fill".sysImg, for: .normal)
+            .byImage("stop.circle.fill".sysImg, for: .selected)
+            /// 事件触发@点按
+            .onTap { [weak self] sender in
+                guard let self else { return }
+                sender.isSelected.toggle()
+                print("🛑 手动停止刷新")
+                isPullRefreshing = false
+                isLoadingMore    = false
+            }
+    ]
+)</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>A9977F0D-D0A5-4F2A-9FC1-1EF1E0684531</string>
 	<key>IDECodeSnippetLanguage</key>
