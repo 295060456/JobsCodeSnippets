@@ -43,7 +43,11 @@ private lazy var simpleAlert: UIAlertController = {
             let ok = alert.actions.first { $0.title == "确定" }
             ok?.isEnabled = !(tf.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
-        .byTextFieldOuterBorder(at: 0, width: 1, color: .systemBlue, cornerRadius: 10, insets: .init(top: 6, left: 12, bottom: 6, right: 12)) // ← 给灰色容器描边
+        .byTextFieldOuterBorder(at: 0,
+                                width: 1,
+                                color: .systemBlue,
+                                cornerRadius: 10,
+                                insets: .init(top: 6, left: 12, bottom: 6, right: 12)) // ← 给灰色容器描边
         .byAddCancel { _ in                          // ✅ 一个回调（只给 action）
             print("Cancel tapped")
         }
