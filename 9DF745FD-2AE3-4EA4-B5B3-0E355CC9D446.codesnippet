@@ -63,7 +63,7 @@ JobsKey(_viewModel)
 -(void)setViewModel:(UIViewModel *)viewModel{
     Jobs_setAssociatedRETAIN_NONATOMIC(_viewModel, viewModel)
 }
-#pragma mark —— @property(nonatomic,assign)jobsByVoidBlock voidBlock;/// 无入参，无返回值的回调
+#pragma mark —— @property(nonatomic,copy)jobsByVoidBlock voidBlock;/// 无入参，无返回值的回调
 JobsKey(_voidBlock)
 @dynamic voidBlock;
 -(jobsByVoidBlock)voidBlock{
