@@ -11,6 +11,9 @@
     <integer>2</integer>
     <key>IDECodeSnippetContents</key>
     <string>/// Jobs OC DSL 快速 UI 全配置：按行删减
+/// UIView API 语义：同一个 Selector 不承担不同副作用
+/// view.byRemove(); // UIView+DSL：移出父视图
+/// view.byClearConstraints(); // UIView+MasonryDSL：清空 Masonry 约束
 _titleLab = jobsMakeLabel(^(__kindof UILabel * _Nullable label) {
     label
         .byText(@&quot;标题&quot;) // 设置文本

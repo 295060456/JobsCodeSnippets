@@ -9,6 +9,9 @@
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>/// AppToolsProtocol
+/// UIView API 语义：同一个 Selector 不承担不同副作用
+/// view.byRemove(); // UIView+DSL：移出父视图
+/// view.byClearConstraints(); // UIView+MasonryDSL：清空 Masonry 约束
 @synthesize viewModel = _viewModel;
 #pragma mark —— BaseProtocol
 /// 单例化和销毁

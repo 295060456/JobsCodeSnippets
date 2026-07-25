@@ -39,7 +39,7 @@ make.left.equalTo(contentView.superview!.snp.centerX)
 
 jobsSetupGKNav(title: "Lottie 动画")
 
-/// Demo 根列表导航流中的子页面及类名以 DemoVC 结尾的页面，会自动在右上角补全全局主题切换按钮
+/// Demo 页右上角最多只显示一个主题入口；rightButtons 收进下拉列表，入口图标始终表达下一次点击动作
 jobsSetupGKNav(
     title: "Demo 列表",
     leftButton:UIButton.sys()
