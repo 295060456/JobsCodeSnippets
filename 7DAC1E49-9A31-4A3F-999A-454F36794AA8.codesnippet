@@ -13,17 +13,17 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.view
-        .byBgColor(UIColor.systemBackgroundColor) // 设置背景色
+        .byBgColor(JobsSystemBackgroundColor) // 自动登记主题背景 Key
         .byUserInteractionEnabled(YES); // 开启交互
     [self configNav];
     [self configSubviews];
 }
 
 -(void)configNav{
-    /// Demo 页右上角最多只显示一个主题入口；其它动作收进下拉列表，入口图标始终表达下一次点击动作
+    /// 主题只重放已标记的背景 / 文字资源；右上角入口保持透明，其它动作收进下拉列表
     self
         .byGKNavTitle(@&quot;Demo&quot;)
-        .byGKNavTitleColor(UIColor.labelColor)
+        .byGKNavTitleColor(JobsLabelColor)
         .byGKNavTitleFont(UIFontWeightBoldSize(17));
 }
 
@@ -38,14 +38,14 @@
             label
                 .byText(@&quot;标题&quot;) // 设置文本
                 .byFont(UIFontWeightBoldSize(16)) // 设置字体
-                .byTextCor(UIColor.labelColor) // 设置文字颜色
+                .byTextCor(JobsLabelColor) // 自动登记主题文字 Key
                 .byTextAlignment(NSTextAlignmentCenter) // 设置对齐方式
                 .byNumberOfLines(1) // 设置行数
                 .byLineBreakMode(NSLineBreakByTruncatingTail) // 设置截断方式
                 .byAdjustsFontForContentSizeCategory(YES) // 跟随系统字体
                 .byAdjustsFontSizeToFitWidth(YES) // 宽度不足时缩放
                 .byMinimumScaleFactor(0.75f) // 最小缩放比例
-                .byBgColor(UIColor.clearColor) // 设置背景色
+                .byBgColor(JobsClearColor) // 设置背景色
                 .addOn(self.view) // 加入父视图
                 .byAdd(^(MASConstraintMaker *make) { // 部署约束
                     make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(JobsWidth(16));
@@ -61,11 +61,11 @@
         _submitBtn = jobsMakeButton(^(__kindof UIButton * _Nullable button) {
             button
                 .jobsResetBtnTitle(@&quot;确认&quot;) // 兼容新旧管线：设置标题
-                .jobsResetBtnTitleCor(UIColor.whiteColor) // 兼容新旧管线：设置标题颜色
+                .jobsResetBtnTitleCor(JobsWhiteColor) // 兼容新旧管线：设置标题颜色
                 .jobsResetBtnTitleFont(UIFontWeightBoldSize(16)) // 兼容新旧管线：设置标题字体
-                .jobsResetBtnBgCor(UIColor.systemBlueColor) // 兼容新旧管线：设置背景色
+                .jobsResetBtnBgCor(JobsSystemBlueColor) // 兼容新旧管线：设置背景色
                 .jobsResetBtnCornerRadiusValue(JobsWidth(10)) // 兼容新旧管线：设置圆角
-                .byTintColor(UIColor.whiteColor) // 设置 tint 色
+                .byTintColor(JobsWhiteColor) // 设置 tint 色
                 .addOn(self.view) // 加入父视图
                 .byAdd(^(MASConstraintMaker *make) { // 部署约束
                     make.left.right.equalTo(self.view).inset(JobsWidth(16));

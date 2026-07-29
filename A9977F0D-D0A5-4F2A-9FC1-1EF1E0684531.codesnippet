@@ -39,7 +39,7 @@ make.left.equalTo(contentView.superview!.snp.centerX)
 
 jobsSetupGKNav(title: "Lottie 动画")
 
-/// Demo 页右上角最多只显示一个主题入口；rightButtons 收进下拉列表，入口图标始终表达下一次点击动作
+/// 主题只重放已标记的背景 / 文字资源；右上角入口保持透明，rightButtons 收进下拉列表
 jobsSetupGKNav(
     title: "Demo 列表",
     leftButton:UIButton.sys()

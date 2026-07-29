@@ -13,7 +13,12 @@
     [[JobsImageRotator alloc] initWithTargetView:imageView
                                       direction:JobsImageRotationDirectionCounterclockwise
                                        interval:JobsImageRotationDefaultInterval];
-[imageRotator start];</string>
+[imageRotator start];
+
+JobsClockIconView *clockIcon =
+    [[JobsClockIconView alloc] initWithDirection:JobsImageRotationDirectionClockwise
+                                        interval:JobsClockIconViewDefaultInterval];
+[clockIcon start];</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>695EFEAE-CB5D-47E4-B069-0B5761E134FF</string>
 	<key>IDECodeSnippetLanguage</key>
@@ -21,7 +26,7 @@
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>JobsImageRotation 方向、默认 Timer 间隔和启动方式</string>
+	<string>JobsImageRotation 通用旋转与无刻度动态时钟图标</string>
 	<key>IDECodeSnippetTitle</key>
 	<string>OC@JobsImageRotation</string>
 	<key>IDECodeSnippetUserSnippet</key>

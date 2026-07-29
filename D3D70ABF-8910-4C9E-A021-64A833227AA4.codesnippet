@@ -14,7 +14,13 @@
     direction: .counterclockwise,
     interval: JobsImageRotator.defaultInterval
 )
-imageRotator.start()</string>
+imageRotator.start()
+
+let clockIcon = JobsClockIconView(
+    direction: .counterclockwise,
+    interval: JobsClockIconView.defaultInterval
+)
+clockIcon.start()</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>D3D70ABF-8910-4C9E-A021-64A833227AA4</string>
 	<key>IDECodeSnippetLanguage</key>
@@ -22,7 +28,7 @@ imageRotator.start()</string>
 	<key>IDECodeSnippetPlatformFamily</key>
 	<string>iphoneos</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>JobsImageRotation 方向、默认 Timer 间隔和启动方式</string>
+	<string>JobsImageRotation 通用旋转与动态时钟图标的方向、Timer 间隔和生命周期</string>
 	<key>IDECodeSnippetTitle</key>
 	<string>Swift@JobsImageRotation</string>
 	<key>IDECodeSnippetUserSnippet</key>
