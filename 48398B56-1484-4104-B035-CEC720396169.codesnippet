@@ -62,8 +62,8 @@ private lazy var exampleButton: UIButton = {
         /// 按钮图片@图文关系
         .byImage("eye.slash".sysImg)                // 未选中图标
         .byImage("eye".sysImg, for: .selected)                    // 选中图标
-        /// iOS15专用@清除偏移
-        .byClearConfigurationBackground()  // 设置 Clear Configuration Background
+        /// 清除所有状态下的按钮配置背景
+        .byClearConfigurationBackground()  // 持续保持按钮背景透明
         /// 按钮@图文位置关系
         .byImagePlacement(.top ,padding: 5)        // 通用（向下兼容）
         .byImagePlacementLegacy(.top, padding: 5)  // 只满足iOS13以下
